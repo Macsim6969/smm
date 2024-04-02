@@ -1,0 +1,45 @@
+<mat-card class="login">
+  <h3 class="login-title">Logowanie do oddziału</h3>
+  <p class="login-desc">Wpisz swój adres e-mail i hasło, aby się zalogować!</p>
+<div class="line"></div>
+  <button mat-button class="select-branch">
+    <p>Select your Branch...</p>
+    <mat-icon svgIcon="arrow-bottom"></mat-icon>
+  </button>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="email">
+      <mat-label class="label">Email*</mat-label>
+      <input matInput
+             type="email"
+             placeholder="mail@simmmple.com"
+             required formControlName="email">
+      <div *ngIf="form.get('email').invalid && form.get('email').touched">
+        <small style="color: red">Email invalid</small>
+      </div>
+    </div>
+    <div class="password">
+      <mat-label class="label">Password*</mat-label>
+        <div class="password_actions">
+          <input placeholder="Min. 8 characters" type="password" formControlName="password">
+          <button type="button" mat-icon-button>
+            <mat-icon svgIcon="view"></mat-icon>
+          </button>
+        </div>
+      <div *ngIf="form.get('password').invalid && form.get('password').touched">
+        <small style="color: red">Password invalid</small>
+      </div>
+    </div>
+    <p class="forget">Forget password?</p>
+    <div class="check-login">
+      <input type="checkbox">
+      <p>Keep me logged in</p>
+    </div>
+
+    <button [disabled]="form.invalid" type="submit" class="login" mat-button>Login</button>
+  </form>
+
+
+
+
+</mat-card>
