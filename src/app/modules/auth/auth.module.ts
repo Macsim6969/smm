@@ -12,10 +12,12 @@ import {MatCard} from "@angular/material/card";
 import {MatLabel} from "@angular/material/form-field";
 import {MatIconButton} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AuthService} from "./@shared/services/auth.service";
+import {AuthGuard} from "../shared/services/auth.guard";
 
 
 const routes: Routes = [
-  {path: '', component: AuthComponent, children: [
+  {path: '', component: AuthComponent, canActivate: [AuthGuard], children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent}
     ]}
@@ -36,7 +38,7 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   exports: [],
-  providers: [AuthIconsService]
+  providers: [AuthIconsService, AuthService]
 })
 
 export class AuthModule {}

@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {StoreService} from "./modules/shared/services/store.service";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppRoutingModule
   ],
   providers:[
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    StoreService
   ],
   bootstrap: [AppComponent]
 })
