@@ -1,0 +1,39 @@
+<section class="profile">
+  <mat-card class="profile-container">
+    <mat-card-header class="profile-header">
+      <p class="title">Your Profile</p>
+      <div class="avatar">
+        <img src="{{userData.image ? userData.image : './assets/images/profile/avatar.svg'}}" alt="">
+      </div>
+    </mat-card-header>
+    <mat-card-content class="profile-content">
+      <div class="block">
+        <p class="desc">Admin id:</p>
+        <p class="info">{{ userData.userID }}</p>
+      </div>
+      <div class="block">
+        <p class="desc">Name:</p>
+        <p class="info">{{userData.name}}</p>
+      </div>
+      <div class="block">
+        <p class="desc">Address:</p>
+        <p class="info">{{ userData.address }}</p>
+      </div>
+      <div class="block">
+        <p class="desc">Contact No.:</p>
+        <p class="info">{{userData.number}}</p>
+      </div>
+      <div class="block">
+        <p class="desc">Email:</p>
+        <p class="info">{{ userData.email }}</p>
+      </div>
+      <div class="block">
+        <p class="desc">Password:</p>
+        <p class="info">{{ userData.password | currencyStar }}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="profile-footer">
+      <button mat-button>Edit</button>
+    </mat-card-actions>
+  </mat-card>
+</section>

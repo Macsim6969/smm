@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit{
 
   public submit(){
     const formData = {...this.form.value}
-    console.log(formData)
     this.form.reset()
 
     this.authService.sigUp(formData).subscribe((data) =>{

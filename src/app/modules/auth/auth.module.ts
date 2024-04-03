@@ -6,7 +6,7 @@ import {LoginComponent} from "./@shared/components/login/login.component";
 import {RegisterComponent} from "./@shared/components/register/register.component";
 import {AuthIconsService} from "./@shared/services/authIcons.service";
 import {LogoComponent} from "./@shared/components/logo/logo.component";
-import {ShareModule} from "../shared/share.module";
+import {ShareModule} from "../../shared/share.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./@shared/services/auth.service";
 

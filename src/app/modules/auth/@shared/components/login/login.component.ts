@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit{
     this.authService.login(formData).subscribe((data) =>{
       data ? this.router.navigate(['/']).then(): null;
     })
+
   }
 
 }
