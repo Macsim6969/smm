@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit{
 
   public submit(){
     const formData = {...this.form.value}
-    this.form.reset()
+    // this.form.reset()
     this.authService.login(formData).subscribe((data) =>{
       data ? this.router.navigate(['/']).then(): null;
     })

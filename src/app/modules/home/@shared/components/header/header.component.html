@@ -1,0 +1,8 @@
+<section class="header">
+  <div class="header-item" *ngFor="let header of headerItems">
+    <p class="header-text">{{header.title}}</p>
+    <div class="header-icon">
+      <mat-icon svgIcon="{{header.icon}}"></mat-icon>
+    </div>
+  </div>
+</section>

@@ -6,18 +6,13 @@ import {LoginComponent} from "./@shared/components/login/login.component";
 import {RegisterComponent} from "./@shared/components/register/register.component";
 import {AuthIconsService} from "./@shared/services/authIcons.service";
 import {LogoComponent} from "./@shared/components/logo/logo.component";
-import {MatIcon} from "@angular/material/icon";
 import {ShareModule} from "../shared/share.module";
-import {MatCard} from "@angular/material/card";
-import {MatLabel} from "@angular/material/form-field";
-import {MatIconButton} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./@shared/services/auth.service";
-import {AuthGuard} from "../shared/services/auth.guard";
 
 
 const routes: Routes = [
-  {path: '', component: AuthComponent, canActivate: [AuthGuard], children: [
+  {path: '', component: AuthComponent, children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent}
     ]}
