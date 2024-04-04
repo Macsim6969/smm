@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
 import {Subscription} from "rxjs";
 import {ListIconService} from "../../../../../shared/modules/payement-list/list.service";
 import {StoreService} from "../../../../../shared/services/store.service";
+import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
 
 @Component({
-  selector: 'app-manager',
-  templateUrl: './manager.component.html',
-  styleUrl: './manager.component.scss'
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss'
 })
-export class ManagerComponent implements OnInit, OnDestroy{
-  public peyementList: PeyementList[];
+export class UsersComponent implements OnInit, OnDestroy{
+  public peyementUsersList: PeyementList[];
 
   private payementSubscription: Subscription;
   constructor(
@@ -22,10 +22,10 @@ export class ManagerComponent implements OnInit, OnDestroy{
   }
 
   private getPeymentListFromStore(){
-    this.payementSubscription = this.store._payementList$.subscribe((data: PeyementList[]) =>{
+    this.payementSubscription = this.store._payementUsersList$.subscribe((data: PeyementList[]) =>{
       if(data){
-        this.peyementList = Object.values(Object.values(data)[0]);
-        console.log(Object.values(data)[0]);
+        this.peyementUsersList = Object.values(Object.values(data)[0]);
+        console.log(Object.values(Object.values(data)[0]));
       }
 
     })

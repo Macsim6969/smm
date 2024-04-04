@@ -11,6 +11,8 @@ import {HeaderComponent} from "./@shared/components/header/header.component";
 const routes: Routes = [
   {path: '', component: HomeComponent, children: [
       {path: 'manager', loadChildren: () => import('./@shared/modules/manager/manager.module').then(m => m.ManagerModule)},
+      {path: 'users', loadChildren: () => import('./@shared/modules/users/users.module').then(m => m.UsersModule)},
+      {path: 'profil', loadChildren: () => import('./@shared/modules/profil/profil.module').then(m => m.ProfilModule)},
       { path: '',
         pathMatch: 'full',
         redirectTo: 'manager'

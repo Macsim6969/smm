@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import {UserData} from "../interfaces/backend.interface";
+import {PeyementList, UserData} from "../interfaces/backend.interface";
 
 
 @Injectable()
@@ -8,7 +8,8 @@ import {UserData} from "../interfaces/backend.interface";
 export class StoreService {
   private idUserSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private userDataSubject: BehaviorSubject<UserData> = new BehaviorSubject<UserData>(null);
-
+  private paymentListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
+  private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   set _idUser(newId: string){
     this.idUserSubject.next(newId);
   }
@@ -23,5 +24,21 @@ export class StoreService {
 
   get _userData$(){
     return this.userDataSubject;
+  }
+
+  set _payementList(newLists: PeyementList[]){
+    this.paymentListsSubject.next(newLists);
+  }
+
+  get _payementList$(){
+    return this.paymentListsSubject;
+  }
+
+  set _payemenUserstList(newLists: PeyementList[]){
+    this.paymentUsersListsSubject.next(newLists);
+  }
+
+  get _payementUsersList$(){
+    return this.paymentUsersListsSubject;
   }
 }

@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent implements OnInit{
-  form: FormGroup;
-
+export class RegisterComponent implements OnInit, OnDestroy{
+  public form: FormGroup;
+private authSubscription: Subscription;
   constructor(
     private authService: AuthService,
     private router: Router
@@ -27,9 +28,13 @@ export class RegisterComponent implements OnInit{
     const formData = {...this.form.value}
     this.form.reset()
 
-    this.authService.sigUp(formData).subscribe((data) =>{
+   this.authSubscription = this.authService.sigUp(formData).subscribe((data) =>{
       data ? this.router.navigate(['auth/login']).then() : null;
     })
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
   }
 
 }

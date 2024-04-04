@@ -1,0 +1,115 @@
+.navigation{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: none;
+  margin-bottom: 31px;
+  .navigation-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 22px 30px 22px 16px;
+
+    .change{
+      background-color: white;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 13.4px;
+      span{
+        color: #A3AED0;
+        font-size: 2rem;
+        line-height: 2.4rem;
+        font-weight: 500;
+      }
+      mat-icon{
+        width: 11px;
+      }
+    }
+  }
+}
+.payement {
+  display: flex;
+  flex-direction: column;
+  gap: 6.6px;
+  padding: 0;
+
+  ::ng-deep .mdc-list-item {
+    padding: 0 !important;
+    border-radius: 10px;
+    background-color: #ffffff;
+
+    &.active {
+      background: linear-gradient(90deg, #6FA9FF 0%, #3470CA 52%, #0048B3 100%);
+
+      p {
+        color: #FFFFFF;
+      }
+    }
+
+    .mdc-list-item__primary-text {
+      padding: 0 26.5px 0 16.5px;
+      display: flex;
+      flex-direction: row !important;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    p {
+      color: #A3AED0;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+      font-weight: 700;
+    }
+
+    .actions {
+      .button {
+        cursor: pointer;
+      }
+    }
+
+    .actions-users {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      align-items: center;
+
+      .button {
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        ::ng-deep mat-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 9px;
+          height: 9px;
+          margin: 0;
+        }
+      }
+
+      .line {
+        font-size: 1.6rem;
+        width: 6.6px;
+        color: #E0E2E7;
+      }
+
+      .close {
+        background-color: #FDEDED;
+      }
+
+      .done {
+        background-color: #E7F7EF;
+      }
+    }
+  }
+}

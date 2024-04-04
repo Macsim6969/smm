@@ -1,0 +1,14 @@
+.users{
+  display: flex;
+  flex-direction: column;
+
+  .users-header{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  app-payement-list{
+    margin-top: 16px;
+  }
+}

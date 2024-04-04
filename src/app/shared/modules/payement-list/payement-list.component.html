@@ -1,0 +1,54 @@
+<mat-card class="navigation">
+  <mat-card-content class="navigation-content">
+    <button class="change">
+      <span>UID</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+    <button class="change">
+      <span>Nazwa</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+    <button class="change">
+      <span>Marka</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+    <button class="change">
+      <span>Płacić</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+    <button class="change">
+      <span>Balansować</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+    <button class="change">
+      <span>Status</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<mat-list class="payement">
+  <mat-list-item class="payement-list" *ngFor="let lists of peyementList; index as i" [ngClass]="{'active': i == 0}">
+    <p class="id">{{ lists.UI_id }}</p>
+    <p class="name">{{lists.name}}</p>
+    <p class="country" >{{lists.country}}</p>
+    <p *ngIf="classUrl === 'users'">{{lists.pay}}</p>
+    <p *ngIf="classUrl === 'users'">{{lists.oscillate}}</p>
+    <p *ngIf="classUrl === 'users'">{{lists.status}}</p>
+    <p *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
+    <p *ngIf="classUrl === 'manager'"
+       class="number">{{ lists.number }}</p>
+    <div *ngIf="classUrl === 'manager'" class="actions">
+      <mat-icon class="button" svgIcon="settings"></mat-icon>
+      <mat-icon class="button" svgIcon="trash"></mat-icon>
+    </div>
+    <div *ngIf="classUrl === 'users'"  class="actions-users">
+      <button class="button close">
+        <mat-icon svgIcon="close"></mat-icon>
+      </button>
+      <p class="line">|</p>
+      <button class="button done">
+        <mat-icon svgIcon="confirme"></mat-icon>
+      </button>
+    </div>
+  </mat-list-item>
+</mat-list>

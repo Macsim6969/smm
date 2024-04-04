@@ -1,29 +1,26 @@
 import {NgModule} from "@angular/core";
-import {ManagerComponent} from "./manager.component";
+import {UsersComponent} from "./users.component";
 import {CommonModule} from "@angular/common";
-import {RouterModule, Routes} from "@angular/router";
 import {ShareModule} from "../../../../../shared/share.module";
-import {ProfileModule} from "../../../../../shared/modules/profile/profile.module";
 import {PayementListModule} from "../../../../../shared/modules/payement-list/payement-list.module";
-
+import {RouterModule, Routes} from "@angular/router";
+import {UsersSearchComponent} from "./@shared/components/users-search/users-search.component";
 
 const routes: Routes = [
-  {path: '', component: ManagerComponent}
+  {path: '', component: UsersComponent}
 ]
 @NgModule({
   declarations: [
-    ManagerComponent
+    UsersComponent,
+    UsersSearchComponent
   ],
-  exports: [],
   imports: [
     CommonModule,
     ShareModule,
-    ProfileModule,
     PayementListModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  exports: []
 })
 
-export class ManagerModule {
-
-}
+export class UsersModule {}
