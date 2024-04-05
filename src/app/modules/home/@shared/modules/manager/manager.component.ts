@@ -25,7 +25,6 @@ export class ManagerComponent implements OnInit, OnDestroy{
     this.payementSubscription = this.store._payementList$.subscribe((data: PeyementList[]) =>{
       if(data){
         this.peyementList = Object.values(Object.values(data)[0]);
-        console.log(Object.values(data)[0]);
       }
 
     })

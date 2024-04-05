@@ -1,0 +1,41 @@
+<section class="popup">
+  <mat-card class="popup-card">
+
+    <mat-card-header class="popup-card-title">
+      <p>Dodaj nową kartę</p>
+    </mat-card-header>
+    <mat-card-content class="popup-card-content">
+      <form class="form" [formGroup]="form" (ngSubmit)="addNewCard()">
+        <div class="input-block">
+          <label>Numer karty</label>
+          <input placeholder="Numer karty" formControlName="number">
+        </div>
+        <div class="input-block">
+          <label>Imię na karcie</label>
+          <input placeholder="Nazwa" formControlName="name">
+        </div>
+        <div class="form-bottom">
+          <div class="input-block">
+            <label>CVC</label>
+            <input placeholder="****" formControlName="cvc">
+          </div>
+          <div class="input-block">
+            <label>Data ważności</label>
+            <input placeholder="MM / YY" type="month" min="2003-01" max="2099-12" formControlName="data">
+
+          </div>
+        </div>
+        <mat-card-actions class="popup-card-actions">
+          <button class="cansel" type="button" (click)="closePopup()">Anulować</button>
+          <button class="add" type="submit">
+            <mat-icon svgIcon="add"></mat-icon>
+            <span>Dodaj kartę</span>
+          </button>
+        </mat-card-actions>
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</section>

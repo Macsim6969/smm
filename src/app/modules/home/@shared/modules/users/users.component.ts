@@ -25,7 +25,6 @@ export class UsersComponent implements OnInit, OnDestroy{
     this.payementSubscription = this.store._payementUsersList$.subscribe((data: PeyementList[]) =>{
       if(data){
         this.peyementUsersList = Object.values(Object.values(data)[0]);
-        console.log(Object.values(Object.values(data)[0]));
       }
 
     })

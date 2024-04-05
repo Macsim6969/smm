@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {ProfilIconService} from "./services/profilIcon.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-profil',
@@ -7,7 +6,5 @@ import {ProfilIconService} from "./services/profilIcon.service";
   styleUrl: './profil.component.scss'
 })
 export class ProfilComponent {
-  constructor(private profilIcon: ProfilIconService) {
-  }
 
 }

@@ -4,7 +4,9 @@ import {ProfilComponent} from "./profil.component";
 import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../../../../shared/share.module";
 import {ProfileModule} from "../../../../../shared/modules/profile/profile.module";
-import {ProfilIconService} from "./services/profilIcon.service";
+import {ProfilIconService} from "../../../../../shared/modules/users-cards/services/profilIcon.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UsersCardsModule} from "../../../../../shared/modules/users-cards/users-cards.module";
 
 const routes: Routes = [
   {path: '', component: ProfilComponent}
@@ -16,11 +18,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ProfileModule,
+    UsersCardsModule,
     RouterModule.forChild(routes),
-    ShareModule
-  ],
-  exports: [],
-  providers: [ProfilIconService]
+    ShareModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ]
 })
 
 export class ProfilModule {

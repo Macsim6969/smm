@@ -13,6 +13,7 @@ const routes: Routes = [
       {path: 'manager', loadChildren: () => import('./@shared/modules/manager/manager.module').then(m => m.ManagerModule)},
       {path: 'users', loadChildren: () => import('./@shared/modules/users/users.module').then(m => m.UsersModule)},
       {path: 'profil', loadChildren: () => import('./@shared/modules/profil/profil.module').then(m => m.ProfilModule)},
+      {path: 'oscillate', loadChildren: () => import('./@shared/modules/oscillate/oscillate.module').then(m => m.OscillateModule)},
       { path: '',
         pathMatch: 'full',
         redirectTo: 'manager'
@@ -31,7 +32,9 @@ const routes: Routes = [
     ShareModule,
     RouterModule.forChild(routes)
   ],
-  exports: [],
+  exports: [
+    HeaderComponent
+  ],
   providers: [SidebarIconService]
 })
 export class HomeModule { }

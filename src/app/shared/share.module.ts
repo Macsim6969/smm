@@ -6,6 +6,7 @@ import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -24,7 +25,10 @@ import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
     MatCardHeader,
     MatCardContent,
     MatCardActions,
-    CurrencyStarPipe
+    CurrencyStarPipe,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput
   ],
   imports: [
     MatIcon,
@@ -37,7 +41,10 @@ import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
     MatIconButton,
     MatCardHeader,
     MatCardContent,
-    MatCardActions
+    MatCardActions,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput
   ]
 })
 

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {PeyementList, UserData} from "../interfaces/backend.interface";
+import {CardHistory, CardInterface} from "../interfaces/card.interface";
 
 
 @Injectable()
@@ -10,6 +11,8 @@ export class StoreService {
   private userDataSubject: BehaviorSubject<UserData> = new BehaviorSubject<UserData>(null);
   private paymentListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
+  private usersCardsSubject: BehaviorSubject<CardInterface[]> = new BehaviorSubject<CardInterface[]>([]);
+  private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
   set _idUser(newId: string){
     this.idUserSubject.next(newId);
   }
@@ -40,5 +43,21 @@ export class StoreService {
 
   get _payementUsersList$(){
     return this.paymentUsersListsSubject;
+  }
+
+  set _userCards(newCard: CardInterface[]) {
+    this.usersCardsSubject.next(newCard);
+  }
+
+  get _userCards$(){
+    return this.usersCardsSubject;
+  }
+
+  set _userCardsHistory(newCard: CardHistory[]) {
+    this.usersCardsHistorySubject.next(newCard);
+  }
+
+  get _userCardsHistory$(){
+    return this.usersCardsHistorySubject;
   }
 }

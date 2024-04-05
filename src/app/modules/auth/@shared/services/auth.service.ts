@@ -30,7 +30,6 @@ export class AuthService {
   }
 
   sigUp(form: { email: string, password: string, name: string }) {
-    console.log(form)
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDoWSiI1UE0JosMMolT2Mw_kc8dWXPm7vM', {
       email: form.email, password: form.password, returnSecureToken: true
     }).pipe(tap(resData => {
@@ -79,7 +78,6 @@ export class AuthService {
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number, localId: string) {
-    console.log(expiresIn)
     this.autoLogout(expiresIn * 1000);
     const expirationData = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationData, localId);
@@ -90,7 +88,6 @@ export class AuthService {
 
   autoLogout(expirationDuration: number) {
     this.tokenExpirationTimer = setTimeout(() => {
-      console.log(expirationDuration)
       this.logout();
     }, expirationDuration)
   }

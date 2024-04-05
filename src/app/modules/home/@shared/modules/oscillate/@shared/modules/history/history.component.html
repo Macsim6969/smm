@@ -1,0 +1,33 @@
+<mat-card class="navigation">
+  <mat-card-content class="navigation-content">
+    <button class="change">
+      <span>UID</span>
+    </button>
+    <button class="change">
+      <span>Nazwa</span>
+    </button>
+    <button class="change">
+      <span>Marka</span>
+    </button>
+    <button class="change">
+      <span>Płacić</span>
+    </button>
+    <button class="change">
+      <span>Balansować</span>
+    </button>
+    <button class="change">
+      <span>Status</span>
+    </button>
+  </mat-card-content>
+</mat-card>
+<mat-list class="payement">
+  <mat-list-item class="payement-list" *ngFor="let lists of historyList; index as i">
+    <p class="id">{{ lists.nomer }}</p>
+    <p class="name">{{ lists.data}}</p>
+    <p class="country">{{ lists.termin }}</p>
+    <p>{{ lists.status }}</p>
+    <p>{{ lists.method }}</p>
+    <p>{{ lists.subscription }}</p>
+    <p class="number_id">{{ lists.kwota }}</p>
+  </mat-list-item>
+</mat-list>
