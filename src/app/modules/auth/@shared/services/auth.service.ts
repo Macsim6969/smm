@@ -39,6 +39,14 @@ export class AuthService {
 
   }
 
+  resetPassword(email: string, newPassword: string) {
+    return this.http.post<any>('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDoWSiI1UE0JosMMolT2Mw_kc8dWXPm7vM', {
+      email: email,
+      newPassword: newPassword, // Correct the field name if needed
+      requestType: 'PASSWORD_RESET', // Specify the request type if required
+    });
+  }
+
   login(form: { email: string, password: string }) {
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDoWSiI1UE0JosMMolT2Mw_kc8dWXPm7vM', {
       email: form.email, password: form.password , returnSecureToken: true

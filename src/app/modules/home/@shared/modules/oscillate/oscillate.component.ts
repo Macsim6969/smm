@@ -9,9 +9,10 @@ import {Subscription} from "rxjs";
   styleUrl: './oscillate.component.scss'
 })
 export class OscillateComponent implements OnInit, OnDestroy{
-
   public historyListALlCard: CardHistory[];
   private historyListSubscription: Subscription;
+
+  public activeUSCard: number
   constructor(
     private store: StoreService
   ) {

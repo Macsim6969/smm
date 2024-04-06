@@ -19,6 +19,7 @@ export class BackendService{
   public getUserProfile(userId: string) {
     return this.http.get<UserData>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/profile.json`).subscribe((data: UserData) =>{
       this.store._userData = data;
+      console.log(data)
     });
   }
 
@@ -49,6 +50,12 @@ export class BackendService{
   public getUserCardsHistory(userId: string){
     return this.http.get<CardHistory[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/userCardsHistori.json`).subscribe((data: CardHistory[]) =>{
       this.store._userCardsHistory = data;
+    })
+  }
+
+  public sendNewDataUser(userId: string, newData:UserData){
+    return this.http.put<UserData>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/profile.json`, newData).subscribe((data: UserData) =>{
+      this.getUserProfile(userId);
     })
   }
 

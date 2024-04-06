@@ -11,7 +11,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 66px;
 
     box-shadow: none;
     border: 0;
@@ -45,6 +44,7 @@
     }
 
     .profile-content {
+      padding-top: 66px;
       padding-left: 114px;
       display: flex;
       flex-direction: column;
@@ -69,13 +69,22 @@
           font-weight: 700;
           color: #2B3674;
         }
+
+        input{
+          outline: none;
+          border: 1px solid ;
+          font-size: 2rem;
+        }
       }
     }
 
     .profile-footer{
-      position: absolute;
-      bottom: 82px;
-      right: 178px;
+      padding: 20px 178px 0 109px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
       button{
         height: 100%;
         font-size: 1.4rem;
@@ -85,6 +94,7 @@
         background: linear-gradient(90deg, #6CA5FC 0%, #2D6BC7 52.5%, #0149B4 100%);
         padding: 8px 50px;
         border-radius:16px ;
+        min-height: 100%;
       }
     }
 

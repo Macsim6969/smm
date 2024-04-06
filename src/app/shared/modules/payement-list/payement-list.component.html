@@ -2,27 +2,27 @@
   <mat-card-content class="navigation-content">
     <button class="change" (click)="sortBy('UI_id')">
       <span>UID</span>
-      <mat-icon svgIcon="arrow"></mat-icon>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
     </button>
 
     <button class="change" (click)="sortBy('name')">
       <span>Nazwa</span>
-      <mat-icon svgIcon="arrow"></mat-icon>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
     </button>
 
     <button class="change" (click)="sortBy('brand')">
       <span>Marka</span>
-      <mat-icon svgIcon="arrow"></mat-icon>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
     </button>
 
     <button class="change" (click)="sortBy('pay')">
       <span>Płacić</span>
-      <mat-icon svgIcon="arrow"></mat-icon>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
     </button>
 
     <button class="change" (click)="sortBy('balance')">
       <span>Balansować</span>
-      <mat-icon svgIcon="arrow"></mat-icon>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
     </button>
 
     <button class="change">

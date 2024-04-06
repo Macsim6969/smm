@@ -25,7 +25,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
       this.activeCard = data;
       this.changeCard(data);
     })
+
+
   }
+
 
   public changeCard(id: number) {
     console.log(this.historyListALlCard)

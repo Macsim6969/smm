@@ -10,8 +10,7 @@ import { PeyementList } from "../../interfaces/backend.interface";
 export class PayementListComponent {
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
-
-  private sortField: string = null;
+  public rotate: boolean;
   private reverseSort: boolean = false;
 
   constructor(
@@ -20,7 +19,7 @@ export class PayementListComponent {
   ) {}
 
   sortBy(field: string) {
-    console.log(field)
+    this.rotate = !this.rotate
     if (field === 'UI_id' || field === 'name' || field === 'brand') {
       this.sortAlphabetically(field);
     } else if (field === 'pay' || field === 'balance') {

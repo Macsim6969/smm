@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CardInterface} from "../../interfaces/card.interface";
 import {ProfilIconService} from "./services/profilIcon.service";
 import {StoreService} from "../../services/store.service";
@@ -12,7 +12,7 @@ import {Subscription} from "rxjs";
   styleUrl: './users-cards.component.scss'
 })
 export class UsersCardsComponent implements OnInit, OnDestroy {
-  @Input() public isProfile: boolean;
+   @Input() public isProfile: boolean;
   public cardPopup: boolean = false
   public cards: CardInterface[];
 

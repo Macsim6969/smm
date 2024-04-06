@@ -9,31 +9,37 @@
     <mat-card-content class="profile-content">
       <div class="block">
         <p class="desc">Admin id:</p>
-        <p class="info">{{ userData.userID }}</p>
+        <p class="info" >{{ userData.userID }}</p>
       </div>
       <div class="block">
         <p class="desc">Name:</p>
-        <p class="info">{{userData.name}}</p>
+        <p *ngIf="!isEditProfil" class="info">{{userData.name}}</p>
+        <input [value]="userData.name" *ngIf="isEditProfil" [(ngModel)]="name">
       </div>
       <div class="block">
         <p class="desc">Address:</p>
-        <p class="info">{{ userData.address }}</p>
+        <p *ngIf="!isEditProfil" class="info">{{ userData.address }}</p>
+        <input [value]="userData.address" *ngIf="isEditProfil" [(ngModel)]="address">
       </div>
       <div class="block">
         <p class="desc">Contact No.:</p>
-        <p class="info">{{userData.number}}</p>
+        <p *ngIf="!isEditProfil" class="info">{{userData.number}}</p>
+        <input [value]="userData.number" *ngIf="isEditProfil" [(ngModel)]="number">
       </div>
       <div class="block">
         <p class="desc">Email:</p>
-        <p class="info">{{ userData.email }}</p>
+        <p *ngIf="!isEditProfil"  class="info">{{ userData.email }}</p>
+        <input [value]="userData.email" *ngIf="isEditProfil" [(ngModel)]="email">
       </div>
       <div class="block">
         <p class="desc">Password:</p>
-        <p class="info">{{ userData.password | currencyStar }}</p>
+        <p *ngIf="!isEditProfil"  class="info">{{ userData.password | currencyStar }}</p>
+        <input [value]="userData.password" *ngIf="isEditProfil" [(ngModel)]="password">
       </div>
     </mat-card-content>
     <mat-card-actions class="profile-footer">
-      <button mat-button>Edit</button>
+      <button (click)="save()" mat-button>Ustawienia profilu</button>
+      <button (click)="edit()" mat-button>Edit</button>
     </mat-card-actions>
   </mat-card>
 </section>

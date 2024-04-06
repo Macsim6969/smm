@@ -1,6 +1,6 @@
 export interface UserData{
   name: string
-  userID: string
+  userID?: string
   email: string
   password: string
   address?: string
