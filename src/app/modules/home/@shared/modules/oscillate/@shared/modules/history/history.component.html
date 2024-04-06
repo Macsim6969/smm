@@ -1,33 +1,40 @@
-<mat-card class="navigation">
-  <mat-card-content class="navigation-content">
-    <button class="change">
-      <span>UID</span>
-    </button>
-    <button class="change">
-      <span>Nazwa</span>
-    </button>
-    <button class="change">
-      <span>Marka</span>
-    </button>
-    <button class="change">
-      <span>Płacić</span>
-    </button>
-    <button class="change">
-      <span>Balansować</span>
-    </button>
-    <button class="change">
-      <span>Status</span>
-    </button>
-  </mat-card-content>
-</mat-card>
-<mat-list class="payement">
-  <mat-list-item class="payement-list" *ngFor="let lists of historyList; index as i">
-    <p class="id">{{ lists.nomer }}</p>
-    <p class="name">{{ lists.data}}</p>
-    <p class="country">{{ lists.termin }}</p>
-    <p>{{ lists.status }}</p>
-    <p>{{ lists.method }}</p>
-    <p>{{ lists.subscription }}</p>
-    <p class="number_id">{{ lists.kwota }}</p>
-  </mat-list-item>
-</mat-list>
+<div class="history">
+  <h3 class="history_title">Historia płatności</h3>
+  <mat-card class="navigation">
+    <mat-card-content class="navigation-content">
+      <button class="change">
+        <span>NO.</span>
+      </button>
+      <button class="change">
+        <span>Data faktury</span>
+      </button>
+      <button class="change">
+        <span>Termin zapłaty</span>
+      </button>
+      <button class="change">
+        <span>Status</span>
+      </button>
+      <button class="change">
+        <span>Metoda płatności</span>
+      </button>
+      <button class="change">
+        <span>Subskrypcja</span>
+      </button>
+      <button class="change">
+        <span>Kwota</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+  <mat-list class="payement">
+    <mat-list-item class="payement-list" *ngFor="let lists of historyList; index as i">
+      <p class="id">{{ lists.nomer }}</p>
+      <p class="name">{{ lists.data}}</p>
+      <p class="country">{{ lists.termin }}</p>
+      <p [ngClass]="{'check': lists.status === 'Aż do', 'complete': lists.status === 'Completed'}">{{ lists.status }}</p>
+      <p>{{ lists.method |creditCardMask  }}</p>
+      <p>{{ lists.subscription }}</p>
+      <p class="number_id">{{ lists.kwota }}</p>
+    </mat-list-item>
+  </mat-list>
+
+</div>
