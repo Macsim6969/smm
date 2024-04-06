@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {StoreService} from "../../../../../../../../shared/services/store.service";
+import {Component, OnDestroy, OnInit, Input} from '@angular/core';
 import {Subscription} from "rxjs";
 import {CardHistory} from "../../../../../../../../shared/interfaces/card.interface";
 import {UsersCardsService} from "../../../../../../../../shared/services/usersCards.service";
@@ -10,42 +9,31 @@ import {UsersCardsService} from "../../../../../../../../shared/services/usersCa
   styleUrl: './history.component.scss'
 })
 export class HistoryComponent implements OnInit, OnDestroy {
-  public historyListALlCard: any;
+  @Input() public historyListALlCard: any;
   public historyList: CardHistory[]
   public activeCard: number = 0
-  private historyListSubscription: Subscription;
 
+  private userActiveCardSubscription: Subscription;
   constructor(
-    private store: StoreService,
     private usersCards: UsersCardsService
   ) {
   }
 
   ngOnInit() {
-    this.usersCards._userActiveCard$.subscribe(data => {
+   this.userActiveCardSubscription = this.usersCards._userActiveCard$.subscribe(data => {
+     console.log(data)
       this.activeCard = data;
       this.changeCard(data);
     })
-    this.initializeHistoryList();
   }
 
   public changeCard(id: number) {
+    console.log(this.historyListALlCard)
     this.historyList = this.historyListALlCard[this.activeCard]
   }
 
   ngOnDestroy() {
-    this.historyListSubscription.unsubscribe();
-  }
-
-  private initializeHistoryList() {
-
-    this.historyListSubscription = this.store._userCardsHistory$.subscribe((data: CardHistory[]) => {
-      console.log(data[this.activeCard])
-
-      this.historyListALlCard = data;
-      this.historyList = Object.values(data[this.activeCard]);
-
-    })
+this.userActiveCardSubscription.unsubscribe();
   }
 
 
