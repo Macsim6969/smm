@@ -46,9 +46,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   private getUserDataFromStore() {
-
     this.userDataSubscription = this.store._userData$.subscribe((data: UserData) => {
-      data ? this.userData = data : null;
+      if (Object.keys(data)) {
+        this.userData = Object.values(data)[0];
+      } else {
+        this.userData = data
+      }
     })
   }
 
