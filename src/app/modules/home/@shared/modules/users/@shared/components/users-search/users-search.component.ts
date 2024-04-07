@@ -7,7 +7,7 @@ import {UsersSearchService} from "../../services/usersSearch.service";
   styleUrl: './users-search.component.scss'
 })
 export class UsersSearchComponent{
- public searchText: string
+ public searchText: string;
 
   constructor(
     private userSearch: UsersSearchService
@@ -15,7 +15,6 @@ export class UsersSearchComponent{
 
   public sendSearch(){
     this.userSearch._searchText = this.searchText;
-    console.log(this.searchText)
   }
 
 }

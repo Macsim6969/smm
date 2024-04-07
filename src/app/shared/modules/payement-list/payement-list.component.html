@@ -47,11 +47,11 @@
       <mat-icon class="button" svgIcon="trash"></mat-icon>
     </div>
     <div *ngIf="classUrl === 'users'"  class="actions-users">
-      <button class="button close">
+      <button class="button close" (click)="remove(lists.UI_id)">
         <mat-icon svgIcon="close"></mat-icon>
       </button>
       <p class="line">|</p>
-      <button class="button done">
+      <button class="button done" (click)="compleate(lists.UI_id)">
         <mat-icon svgIcon="confirme"></mat-icon>
       </button>
     </div>

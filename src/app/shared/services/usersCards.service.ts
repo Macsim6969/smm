@@ -8,7 +8,6 @@ export class UsersCardsService {
   private userActiveCardSubject: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   set _userActiveCard(newCardId: number){
-    console.log(newCardId)
     this.userActiveCardSubject.next(newCardId);
   }
 

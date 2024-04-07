@@ -1,15 +1,16 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { ListIconService } from "./list.service";
-import { PeyementList } from "../../interfaces/backend.interface";
+import {ListIconService} from "./list.service";
+import {PeyementList} from "../../interfaces/backend.interface";
 import {UsersSearchService} from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
 import {Subscription} from "rxjs";
+import {BackendService} from "../../services/backend.service";
 
 @Component({
   selector: 'app-payement-list',
   templateUrl: './payement-list.component.html',
   styleUrls: ['./payement-list.component.scss']
 })
-export class PayementListComponent implements OnInit, OnDestroy{
+export class PayementListComponent implements OnInit, OnDestroy {
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
   public searchText: string
@@ -21,15 +22,27 @@ export class PayementListComponent implements OnInit, OnDestroy{
   constructor(
     private listIconService: ListIconService,
     private cdr: ChangeDetectorRef,
-    private userSearch: UsersSearchService
-  ) {}
+    private userSearch: UsersSearchService,
+    private backendService: BackendService
+  ) {
+  }
 
   ngOnInit() {
     this.streamSearchText();
   }
 
-  private streamSearchText(){
-   this.searchSubscription = this.userSearch._searchText$.subscribe((data) => this.searchText = data);
+  public remove(id: number) {
+    const localId = JSON.parse(localStorage.getItem('userData'));
+    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+    this.backendService.sendPeyementUsersList(localId.localId, this.peyementList);
+  }
+
+  public compleate(id) {
+    const localId = JSON.parse(localStorage.getItem('userData'));
+    const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
+    const newComplete = {...completeList}
+    this.backendService.sendPeyementUsersListToComplete(localId.localId, newComplete);
+    this.remove(id);
   }
 
   sortBy(field: string) {
@@ -41,6 +54,14 @@ export class PayementListComponent implements OnInit, OnDestroy{
     }
 
     this.cdr.detectChanges(); // Detect changes after sorting
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+  }
+
+  private streamSearchText() {
+    this.searchSubscription = this.userSearch._searchText$.subscribe((data) => this.searchText = data);
   }
 
   private sortNumericField(field: string) {
@@ -76,10 +97,6 @@ export class PayementListComponent implements OnInit, OnDestroy{
       return +item[field];
     }
     return item[field];
-  }
-
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
   }
 
 }

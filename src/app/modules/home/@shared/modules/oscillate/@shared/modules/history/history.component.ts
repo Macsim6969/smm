@@ -21,7 +21,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
    this.userActiveCardSubscription = this.usersCards._userActiveCard$.subscribe(data => {
-     console.log(data)
       this.activeCard = data;
       this.changeCard(data);
     })
@@ -31,12 +30,11 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
 
   public changeCard(id: number) {
-    console.log(this.historyListALlCard)
-    this.historyList = this.historyListALlCard[this.activeCard]
+    this.historyList = this.historyListALlCard[this.activeCard];
   }
 
   ngOnDestroy() {
-this.userActiveCardSubscription.unsubscribe();
+    this.userActiveCardSubscription.unsubscribe();
   }
 
 

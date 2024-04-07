@@ -31,6 +31,7 @@ export class StoreService {
 
   set _payementList(newLists: PeyementList[]){
     this.paymentListsSubject.next(newLists);
+    console.log(newLists, 'newLists')
   }
 
   get _payementList$(){

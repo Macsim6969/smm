@@ -9,28 +9,31 @@ import {StoreService} from "../../../../../shared/services/store.service";
   templateUrl: './manager.component.html',
   styleUrl: './manager.component.scss'
 })
-export class ManagerComponent implements OnInit, OnDestroy{
+export class ManagerComponent implements OnInit, OnDestroy {
   public peyementList: PeyementList[];
 
   private payementSubscription: Subscription;
+
   constructor(
     private listIconService: ListIconService,
     private store: StoreService
-  ) {}
+  ) {
+  }
+
   ngOnInit() {
     this.getPeymentListFromStore();
   }
 
-  private getPeymentListFromStore(){
-    this.payementSubscription = this.store._payementList$.subscribe((data: PeyementList[]) =>{
-      if(data){
+  ngOnDestroy() {
+    this.payementSubscription.unsubscribe();
+  }
+
+  private getPeymentListFromStore() {
+    this.payementSubscription = this.store._payementList$.subscribe((data: PeyementList[]) => {
+      if (data) {
         this.peyementList = Object.values(Object.values(data)[0]);
       }
 
     })
-  }
-
-  ngOnDestroy() {
-    this.payementSubscription.unsubscribe();
   }
 }
