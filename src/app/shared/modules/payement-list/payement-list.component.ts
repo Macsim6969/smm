@@ -31,6 +31,11 @@ export class PayementListComponent implements OnInit, OnDestroy {
     this.streamSearchText();
   }
 
+  public removeManager(id: number){
+    const localId = JSON.parse(localStorage.getItem('userData'));
+    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+    this.backendService.sendPeyementList(localId.localId, this.peyementList);
+  }
   public remove(id: number) {
     const localId = JSON.parse(localStorage.getItem('userData'));
     this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);

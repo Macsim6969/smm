@@ -5,6 +5,7 @@ import {ShareModule} from "../../../../../shared/share.module";
 import {RouterModule, Routes} from "@angular/router";
 import {UsersCardsModule} from "../../../../../shared/modules/users-cards/users-cards.module";
 import {HistoryModule} from "./@shared/modules/history/history.module";
+import {HistoryService} from "./@shared/services/history.service";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     HistoryModule,
     UsersCardsModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [HistoryService]
 })
 export class OscillateModule { }

@@ -28,6 +28,13 @@
     box-shadow: none;
     cursor: pointer;
 
+    &.active{
+      .content-cards-container{
+        width: 390px;
+        max-height: 226px;
+      }
+    }
+
     .content-cards-container {
       display: flex;
       flex-direction: row;

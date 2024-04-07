@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit, Input} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {CardHistory} from "../../../../../../../../shared/interfaces/card.interface";
 import {UsersCardsService} from "../../../../../../../../shared/services/usersCards.service";
+import {HistoryService} from "../../services/history.service";
 
 @Component({
   selector: 'app-history',
@@ -9,31 +10,43 @@ import {UsersCardsService} from "../../../../../../../../shared/services/usersCa
   styleUrl: './history.component.scss'
 })
 export class HistoryComponent implements OnInit, OnDestroy {
-  @Input() public historyListALlCard: any;
-  public historyList: CardHistory[]
-  public activeCard: number = 0
+  public historyListALlCard: any;
+  public historyList: CardHistory[] | any;
+  public activeCard: number = 0;
 
+  private userHistoryListSubscription: Subscription;
   private userActiveCardSubscription: Subscription;
   constructor(
-    private usersCards: UsersCardsService
+    private usersCards: UsersCardsService,
+    private historyService: HistoryService
   ) {
   }
 
   ngOnInit() {
-   this.userActiveCardSubscription = this.usersCards._userActiveCard$.subscribe(data => {
-      this.activeCard = data;
-      this.changeCard(data);
+    this.streamUserListHistory();
+    this.streamUserActiveCards();
+  }
+
+  private streamUserListHistory(){
+  this.userHistoryListSubscription =  this.historyService._historyCard$.subscribe((data) =>{
+      this.historyListALlCard = data;
+      this.historyList = Object.values(data)[0];
     })
-
-
+  }
+  private streamUserActiveCards(){
+    this.userActiveCardSubscription = this.usersCards._userActiveCard$.subscribe(data => {
+      this.activeCard = data;
+      this.changeCard();
+    })
   }
 
 
-  public changeCard(id: number) {
+  public changeCard() {
     this.historyList = this.historyListALlCard[this.activeCard];
   }
 
   ngOnDestroy() {
+    this.userHistoryListSubscription.unsubscribe();
     this.userActiveCardSubscription.unsubscribe();
   }
 

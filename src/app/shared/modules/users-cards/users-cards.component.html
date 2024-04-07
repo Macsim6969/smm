@@ -1,7 +1,8 @@
 <div class="list-cards">
   <mat-card-header class="content-cards-title">Payment Method</mat-card-header>
   <div class="list-cards-container">
-    <mat-card class="content-cards" *ngFor="let card of cards" (click)="choiceCard(card.cvc)">
+
+    <mat-card class="content-cards" *ngFor="let card of cards;index as i" (click)="choiceCard(card.cvc, i)" [ngClass]="{'active': this.activeCard === i}">
       <mat-card-content class="content-cards-container">
         <div class="card-payment" style="background: url('./assets/images/cards/cards.jpg')">
           <div class="card-payment-header">

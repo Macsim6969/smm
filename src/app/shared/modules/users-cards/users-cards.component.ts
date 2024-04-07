@@ -4,7 +4,7 @@ import {ProfilIconService} from "./services/profilIcon.service";
 import {StoreService} from "../../services/store.service";
 import {UsersCardsService} from "../../services/usersCards.service";
 import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Observable, Subscription, timer} from "rxjs";
 
 @Component({
   selector: 'app-users-cards',
@@ -15,6 +15,7 @@ export class UsersCardsComponent implements OnInit, OnDestroy {
    @Input() public isProfile: boolean;
   public cardPopup: boolean = false
   public cards: CardInterface[];
+  public activeCard: number = 0;
 
 private userCardsSubscription: Subscription;
   constructor(private profilIcon: ProfilIconService,
@@ -26,25 +27,26 @@ private userCardsSubscription: Subscription;
   ngOnInit() {
     this.getCardUsers();
   }
+
   private getCardUsers() {
-  this.userCardsSubscription = this.store._userCards$.subscribe((data: CardInterface[]) => {
+    this.userCardsSubscription = this.store._userCards$.subscribe((data: CardInterface[]) => {
       this.cards = data;
-      // this.usersCard._userActiveCard = data[this.usersCard._userActiveCard].cvc;
     })
   }
 
-  public choiceCard(id: number) {
+  public choiceCard(id: number, idCard: number) {
     this.usersCard._userActiveCard = id;
-   if(this.isProfile){
-     this.router.navigate(['/oscillate']).then();
-   }
+    this.activeCard = idCard;
+      if(this.isProfile){
+        this.router.navigate(['/oscillate']).then();
+      }
   }
 
   public closePopup(event: boolean) {
     this.cardPopup = event
   }
 
-  copyToClipboard(text: number): void {
+  public copyToClipboard(text: number): void {
     const textField = document.createElement('textarea');
     textField.innerText = text.toString();
     document.body.appendChild(textField);

@@ -14,6 +14,7 @@ const routes: Routes = [
       {path: 'users', loadChildren: () => import('./@shared/modules/users/users.module').then(m => m.UsersModule)},
       {path: 'profil', loadChildren: () => import('./@shared/modules/profil/profil.module').then(m => m.ProfilModule)},
       {path: 'oscillate', loadChildren: () => import('./@shared/modules/oscillate/oscillate.module').then(m => m.OscillateModule)},
+      {path: 'support', loadChildren: () => import('./@shared/modules/support/support.module').then(m => m.SupportModule)},
       { path: '',
         pathMatch: 'full',
         redirectTo: 'manager'

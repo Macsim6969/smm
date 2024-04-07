@@ -1,0 +1,11 @@
+<section class="support-cards">
+  <mat-card *ngFor="let card of supportCards" class="card">
+    <mat-card-header class="card-header">
+      <mat-icon svgIcon="{{card.icon}}"></mat-icon>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <p class="title">{{ card.title }}</p>
+      <p class="content">{{ card.content }}</p>
+    </mat-card-content>
+  </mat-card>
+</section>
