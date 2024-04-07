@@ -5,9 +5,9 @@
   <div class="header-search">
     <div class="search">
       <mat-icon svgIcon="search"></mat-icon>
-      <input placeholder="Szukaj" type="Szukaj">
+      <input placeholder="Szukaj" type="Szukaj" [(ngModel)]="searchText">
     </div>
-    <div class="actions">
+    <div class="actions" (click)="sendSearch()">
       Dodaj ofertę
     </div>
   </div>

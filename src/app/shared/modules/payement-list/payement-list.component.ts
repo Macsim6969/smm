@@ -1,22 +1,36 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { ListIconService } from "./list.service";
 import { PeyementList } from "../../interfaces/backend.interface";
+import {UsersSearchService} from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-payement-list',
   templateUrl: './payement-list.component.html',
   styleUrls: ['./payement-list.component.scss']
 })
-export class PayementListComponent {
+export class PayementListComponent implements OnInit, OnDestroy{
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
+  public searchText: string
   public rotate: boolean;
   private reverseSort: boolean = false;
 
+  private searchSubscription: Subscription;
+
   constructor(
     private listIconService: ListIconService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private userSearch: UsersSearchService
   ) {}
+
+  ngOnInit() {
+    this.streamSearchText();
+  }
+
+  private streamSearchText(){
+   this.searchSubscription = this.userSearch._searchText$.subscribe((data) => this.searchText = data);
+  }
 
   sortBy(field: string) {
     this.rotate = !this.rotate
@@ -62,6 +76,10 @@ export class PayementListComponent {
       return +item[field];
     }
     return item[field];
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
 }

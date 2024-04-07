@@ -32,7 +32,7 @@
   </mat-card-content>
 </mat-card>
 <mat-list class="payement">
-  <mat-list-item class="payement-list" *ngFor="let lists of peyementList; index as i" [ngClass]="{'active': i == 0}">
+  <mat-list-item class="payement-list" *ngFor="let lists of peyementList| filter:searchText; index as i" [ngClass]="{'active': i == 0}">
     <p class="id">{{ lists.UI_id }}</p>
     <p class="name">{{lists.name}}</p>
     <p class="country" >{{lists.country}}</p>
