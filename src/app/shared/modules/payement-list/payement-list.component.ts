@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ListIconService} from "./list.service";
-import {PeyementList} from "../../interfaces/backend.interface";
-import {UsersSearchService} from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
-import {Subscription} from "rxjs";
-import {BackendService} from "../../services/backend.service";
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ListIconService } from "./list.service";
+import { PeyementList } from "../../interfaces/backend.interface";
+import { UsersSearchService } from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
+import { Subscription } from "rxjs";
+import { BackendService } from "../../services/backend.service";
 
 @Component({
   selector: 'app-payement-list',
@@ -13,8 +13,13 @@ import {BackendService} from "../../services/backend.service";
 export class PayementListComponent implements OnInit, OnDestroy {
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
-  public searchText: string
+  public localId: any;
+  public searchText: string;
   public rotate: boolean;
+  public isChange: boolean;
+  public isActiveId: number;
+  public name: string;
+  public pay: number;
   private reverseSort: boolean = false;
 
   private searchSubscription: Subscription;
@@ -28,25 +33,52 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.localId = JSON.parse(localStorage.getItem('userData'));
     this.streamSearchText();
   }
 
-  public removeManager(id: number){
-    const localId = JSON.parse(localStorage.getItem('userData'));
+  public changeManager(id: number) {
+    this.isChange = true;
+    this.isActiveId = id;
+  }
+
+  public removeChange(id: number) {
+    this.isChange = false;
+    this.isActiveId = null;
+    this.pay = null;
+    this.name = null;
+  }
+
+  public doneChange(id: number) {
+    let index = this.peyementList.findIndex(data => data.UI_id === id);
+    if (index !== -1) {
+
+      let updatedData = { ...this.peyementList[index] };
+
+      updatedData.name = this.name;
+      updatedData.number = this.pay;
+      this.peyementList[index] = updatedData;
+      console.log(this.peyementList);
+      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
+    }
+    this.removeChange(id);
+  }
+
+  public removeManager(id: number) {
+
     this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-    this.backendService.sendPeyementList(localId.localId, this.peyementList);
+    this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
   }
   public remove(id: number) {
-    const localId = JSON.parse(localStorage.getItem('userData'));
     this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-    this.backendService.sendPeyementUsersList(localId.localId, this.peyementList);
+    this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
   }
 
   public compleate(id) {
-    const localId = JSON.parse(localStorage.getItem('userData'));
     const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
-    const newComplete = {...completeList}
-    this.backendService.sendPeyementUsersListToComplete(localId.localId, newComplete);
+    const newComplete = { ...completeList }
+    newComplete.status = 'przyłączać'
+    this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
     this.remove(id);
   }
 
@@ -59,10 +91,6 @@ export class PayementListComponent implements OnInit, OnDestroy {
     }
 
     this.cdr.detectChanges(); // Detect changes after sorting
-  }
-
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
   }
 
   private streamSearchText() {
@@ -104,4 +132,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
     return item[field];
   }
 
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+  }
 }

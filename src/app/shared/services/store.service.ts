@@ -7,9 +7,11 @@ import {CardHistory, CardInterface} from "../interfaces/card.interface";
 @Injectable()
 
 export class StoreService {
+  private whosePage: BehaviorSubject<'manager' | 'brand' | 'afiliat'> = new BehaviorSubject<'manager' | 'brand' | 'afiliat'>(null);
   private idUserSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private userDataSubject: BehaviorSubject<UserData> = new BehaviorSubject<UserData>(null);
   private paymentListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
+  private paymentUsersListsCompleteSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   private usersCardsSubject: BehaviorSubject<CardInterface[]> = new BehaviorSubject<CardInterface[]>([]);
   private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
@@ -36,6 +38,15 @@ export class StoreService {
   get _payementList$(){
     return this.paymentListsSubject;
   }
+
+  set _payemenUserstListComplete(newLists: PeyementList[]){
+    this.paymentUsersListsCompleteSubject.next(newLists);
+  }
+
+  get _payementUsersListComplete$(){
+    return this.paymentUsersListsCompleteSubject;
+  }
+
 
   set _payemenUserstList(newLists: PeyementList[]){
     this.paymentUsersListsSubject.next(newLists);

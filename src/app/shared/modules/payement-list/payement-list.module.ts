@@ -6,6 +6,7 @@ import {MatList, MatListItem} from "@angular/material/list";
 import {ListIconService} from "./list.service";
 import {FilterPipe} from "./listSearch.pipe";
 import {UsersSearchService} from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {UsersSearchService} from "../../../modules/home/@shared/modules/users/@s
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ShareModule,
     MatList,
     MatListItem

@@ -32,21 +32,27 @@
   </mat-card-content>
 </mat-card>
 <mat-list class="payement">
-  <mat-list-item class="payement-list" *ngFor="let lists of peyementList| filter:searchText; index as i" [ngClass]="{'active': i == 0}">
+  <mat-list-item class="payement-list" *ngFor="let lists of peyementList| filter:searchText; index as i"
+    [ngClass]="{'active': i == 0}">
     <p class="id">{{ lists.UI_id }}</p>
-    <p class="name">{{lists.name}}</p>
-    <p class="country" >{{lists.country}}</p>
+    <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
+    <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
+    <p class="country">{{lists.country}}</p>
     <p *ngIf="classUrl === 'users'">{{lists.pay}}</p>
     <p *ngIf="classUrl === 'users'">{{lists.oscillate}}</p>
     <p *ngIf="classUrl === 'users'">{{lists.status}}</p>
     <p *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
-    <p *ngIf="classUrl === 'manager'"
-       class="number">{{ lists.number }}</p>
-    <div *ngIf="classUrl === 'manager'" class="actions">
-      <mat-icon class="button" svgIcon="settings"></mat-icon>
+    <p *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number" >{{ lists.number }}</p>
+    <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
+    <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
+      <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>
+      <mat-icon class="button" svgIcon="confirme" (click)="doneChange(lists.UI_id)"></mat-icon>
+    </div>
+    <div *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="actions">
+      <mat-icon class="button" svgIcon="settings" (click)="changeManager(lists.UI_id)"></mat-icon>
       <mat-icon class="button" svgIcon="trash" (click)="removeManager(lists.UI_id)"></mat-icon>
     </div>
-    <div *ngIf="classUrl === 'users'"  class="actions-users">
+    <div *ngIf="classUrl === 'offers'" class="actions-users">
       <button class="button close" (click)="remove(lists.UI_id)">
         <mat-icon svgIcon="close"></mat-icon>
       </button>

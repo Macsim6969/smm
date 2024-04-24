@@ -35,8 +35,17 @@ export class BackendService{
   }
 
   public sendPeyementUsersListToComplete(userId: string, peymentList: PeyementList){
-    return this.http.post<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/completePeyment.json`, peymentList).subscribe();
+    return this.http.post<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/completePeyment.json`, peymentList).subscribe(() =>{
+      this.getPeyementUsersListComplete(userId);
+    });
   }
+
+  public getPeyementUsersListComplete(userId: string){
+    return this.http.get<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/completePeyment.json`).subscribe((data: PeyementList[]) =>{
+      this.store._payemenUserstListComplete = data;
+    })
+  }
+
   public sendPeyementUsersList(userId: string, peymentList: PeyementList[]){
     return this.http.put<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/paymentUsersList.json`, peymentList).subscribe(() =>{
       this.getPeyementUsersList(userId);

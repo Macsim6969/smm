@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {StoreService} from "../../services/store.service";
-import {UserData} from "../../interfaces/backend.interface";
-import {Subscription} from "rxjs";
-import {AuthService} from "../../../modules/auth/@shared/services/auth.service";
-import {BackendService} from "../../services/backend.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { StoreService } from "../../services/store.service";
+import { UserData } from "../../interfaces/backend.interface";
+import { Subscription } from "rxjs";
+import { AuthService } from "../../../modules/auth/@shared/services/auth.service";
+import { BackendService } from "../../services/backend.service";
 
 @Component({
   selector: 'app-profile',
@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       } else {
         this.userData = data
       }
+     
     })
   }
 
