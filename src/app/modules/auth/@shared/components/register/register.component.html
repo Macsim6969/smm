@@ -12,10 +12,7 @@
     </div>
     <div class="email">
       <mat-label class="label">Hasło</mat-label>
-      <input matInput
-             type="password"
-             placeholder="Hasło"
-             required formControlName="password">
+      <input matInput type="password" placeholder="Hasło" required formControlName="password">
       <div *ngIf="form.get('password').invalid && form.get('password').touched">
         <small style="color: red">Password invalid</small>
       </div>
@@ -23,7 +20,7 @@
     <div class="password">
       <mat-label class="label">Potwierdź hasło*</mat-label>
       <div class="password_actions">
-        <input  type="text" value="Hasło">
+        <input type="password" placeholder="Hasło" formControlName="doublePassword">
         <button mat-icon-button>
           <mat-icon svgIcon="view"></mat-icon>
         </button>
@@ -35,7 +32,7 @@
       <p>Keep me logged in</p>
     </div>
 
-    <button [disabled]="form.invalid" type="submit" class="login" mat-button>Login</button>
+    <button [style.opacity]="form.invalid && form.value.doublePassword !== form.value.password ? '0.5': '1'" [disabled]="form.invalid && form.value.doublePassword !== form.value.password" type="submit" class="login" mat-button>Login</button>
   </form>
 
 
