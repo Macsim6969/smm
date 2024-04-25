@@ -58,6 +58,31 @@
       gap: 5px;
       padding: 5px 0 5px 11px;
 
+      &.brand{
+        &.users,
+        &.manager-page,
+        &.affiliate{
+          display: none;
+        }
+      }
+
+      &.afiliat{
+        &.users,
+        &.manager-page,
+        &.marka{
+          display: none;
+        }
+      }
+
+      &.manager{
+        &.brand,
+        &.affiliate,
+        &.marka,
+        &.added-processing{
+          display: none;
+        }
+      }
+
       &.active {
         .content-icon {
           background-color: #5791EA;

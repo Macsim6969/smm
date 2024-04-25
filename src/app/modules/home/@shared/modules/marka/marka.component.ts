@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ListIconService } from '../../../../../shared/modules/payement-list/list.service';
 import { Subscription } from 'rxjs';
 import { PeyementList } from '../../../../../shared/interfaces/backend.interface';
+import { ListIconService } from '../../../../../shared/modules/payement-list/list.service';
 import { StoreService } from '../../../../../shared/services/store.service';
 
 @Component({
-  selector: 'app-afiliat',
-  templateUrl: './afiliat.component.html',
-  styleUrl: './afiliat.component.scss'
+  selector: 'app-marka',
+  templateUrl: './marka.component.html',
+  styleUrl: './marka.component.scss'
 })
-export class AfiliatComponent implements OnInit, OnDestroy {
+export class MarkaComponent implements OnInit, OnDestroy {
   public peyementList: PeyementList[];
   public rules: 'manager' | 'brand' | 'afiliat';
   private payementSubscription: Subscription;

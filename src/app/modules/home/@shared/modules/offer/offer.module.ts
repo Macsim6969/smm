@@ -6,7 +6,6 @@ import { OfferComponent } from "./offer.component";
 
 import { PayementListModule } from "../../../../../shared/modules/payement-list/payement-list.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { PopupOffersComponent } from "../../../../../shared/components/popup-offers/popup-offers.component";
 import { UsersSearchComponent } from "./@shared/components/users-search/users-search.component";
 import { UsersSearchService } from "../../../../../shared/services/usersSearch.service";
 
@@ -17,7 +16,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     OfferComponent,
-    PopupOffersComponent,
     UsersSearchComponent
   ],
   exports: [],

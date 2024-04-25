@@ -38,8 +38,8 @@
     <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
     <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
     <p class="country">{{lists.country}}</p>
-    <p *ngIf="classUrl === 'users'">{{lists.pay}}</p>
-    <p *ngIf="classUrl === 'users'">{{lists.oscillate}}</p>
+    <p *ngIf="classUrl === 'users'|| 'offers'">{{lists.pay}}</p>
+    <p *ngIf="classUrl === 'users' || 'offers'">{{lists.oscillate}}</p>
     <p *ngIf="classUrl === 'users'">{{lists.status}}</p>
     <p *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
     <p *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number" >${{ lists.number }}</p>

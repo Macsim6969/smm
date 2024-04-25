@@ -6,8 +6,10 @@
     </div>
 
     <div class="sidebar-container-content">
-      <div class="content" *ngFor="let navigation of sidebarItem;index as i" routerLink="{{navigation.route}}"
-        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [style.display]="((rules === 'brand' || rules === 'afiliat') && navigation.title === 'Użytkownicy') || ((rules === 'afiliat') && navigation.title === 'Menedżer')  ? 'none' : 'flex'">
+      <div class="content {{navigation.alt}}"
+        [ngClass]="{'manager': rules === 'manager', 'brand' : rules === 'brand', 'afiliat':  rules === 'afiliat'}"
+        *ngFor="let navigation of sidebarItem;index as i" routerLink="{{navigation.route}}" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}">
         <div class="content-icon">
           <mat-icon svgIcon="{{navigation.icon}}"></mat-icon>
         </div>

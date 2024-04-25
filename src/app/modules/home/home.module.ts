@@ -6,12 +6,16 @@ import { RouterModule, Routes } from "@angular/router";
 import { SidebarComponent } from "./@shared/components/sidebar/sidebar.component";
 import { SidebarIconService } from "./@shared/services/sidebarIcon.service";
 import { HeaderComponent } from "./@shared/components/header/header.component";
+import { PopupOffersComponent } from '../../shared/components/popup-offers/popup-offers.component';
+import { PopupOfferService } from '../../shared/services/popup-offer.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       { path: 'affiliate', loadChildren: () => import('./@shared/modules/afiliat/afiliat.module').then(m => m.AfiliatModule) },
+      { path: 'marka', loadChildren: () => import('./@shared/modules/marka/marka.module').then(m => m.MarkaModule) },
       { path: 'manager', loadChildren: () => import('./@shared/modules/manager/manager.module').then(m => m.ManagerModule) },
       { path: 'added-processing', loadChildren: () => import('./@shared/modules/added-offers/added-offers.module').then(m => m.AddedOffersModule) },
       { path: 'offers', loadChildren: () => import('./@shared/modules/offer/offer.module').then(m => m.OfferModule) },
@@ -32,16 +36,19 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    PopupOffersComponent
   ],
   imports: [
     CommonModule,
     ShareModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [
     HeaderComponent
   ],
-  providers: [SidebarIconService]
+  providers: [SidebarIconService, PopupOfferService]
 })
 export class HomeModule { }

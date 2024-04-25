@@ -19,7 +19,6 @@ export class BackendService{
     return this.http.get<UserData>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/profile.json`).subscribe((data: UserData) =>{
       this.store._userData = data;
       this.store._whosePage = Object.values(data)[0].rules
-      console.log(Object.values(data)[0].rules)
     });
   }
 
@@ -29,9 +28,10 @@ export class BackendService{
     })
   }
 
-  public sendOffersActive(userId: string, peymentList: PeyementList){
-    return this.http.post<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/activeOffers.json`, peymentList).subscribe(() =>{
-      // this.getOffers(userId);
+
+  public sendOffer(userId: string, peymentList: PeyementList){
+    return this.http.post<PeyementList[]>( `https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/offers.json`, peymentList).subscribe(() =>{
+      this.getOffers(userId);
     })
   }
 

@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BackendService } from '../../services/backend.service';
+import { PopupOfferService } from '../../services/popup-offer.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-popup-offers',
@@ -9,33 +11,49 @@ import { BackendService } from '../../services/backend.service';
   styleUrl: './popup-offers.component.scss'
 })
 export class PopupOffersComponent {
-  @Output() public close: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  public isPopup: boolean;
   public form: FormGroup
   constructor(
-    private backEndService: BackendService
+    private backEndService: BackendService,
+    private isPopupService: PopupOfferService,
+    private backend: BackendService,
+    private store: StoreService
   ) { }
 
   ngOnInit() {
     this.initializeForm();
+    this.streamDataPopupOffersFromStore();
+  }
+
+  private streamDataPopupOffersFromStore() {
+    this.isPopupService._isOfferPopup$.subscribe((data) => {
+      this.isPopup = data;
+    })
   }
   private initializeForm() {
     this.form = new FormGroup<any>({
-      number: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
       name: new FormControl('', [Validators.required]),
-      cvc: new FormControl('', [Validators.required, Validators.maxLength(3)]),
-      data: new FormControl('', [Validators.required])
+      country: new FormControl('', [Validators.required]),
+      oscillate: new FormControl('', [Validators.required]),
+      pay: new FormControl('', [Validators.required]),
+      status: new FormControl('', [Validators.required])
     })
   }
 
   public closePopup() {
-    this.close.emit(false);
+    this.isPopupService._isOfferPopup = false;
   }
 
   public addNewCard() {
-    const formData = { ...this.form.value }
+    let lenght
+    this.store._offer$.subscribe((data) => lenght = Object.values(data).length)
+
+    const formData = { ...this.form.value };
     const localId = JSON.parse(localStorage.getItem('userData'));
-    this.backEndService.sendNewUserCard(localId.localId, formData);
-    this.close.emit(false);
+
+    formData['UI_id'] = lenght + 1;
+    this.backend.sendOffer(localId.localId, formData);
+    this.isPopupService._isOfferPopup = false;
   }
+
 }

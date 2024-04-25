@@ -28,7 +28,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   private getDataRulesFromStore() {
     this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
       this.rules = data;
-      if (data !== 'afiliat') {
+      if (data === 'manager') {
         this.getDataRulesFromStore()
       } else {
         this.getOffersFromStore();
@@ -48,7 +48,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   private getOffersFromStore() {
     this.offersSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
       if (data) {
-        this.peyementUsersList = (data);
+        this.peyementUsersList = Object.values(data);
       }
     })
   }

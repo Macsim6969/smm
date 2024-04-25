@@ -63,7 +63,6 @@ export class PayementListComponent implements OnInit, OnDestroy {
       updatedData.name = this.name;
       updatedData.number = this.pay;
       this.peyementList[index] = updatedData;
-      console.log(this.peyementList);
       this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
     }
     this.removeChange(id);

@@ -33,7 +33,6 @@ export class AddedOffersComponent {
 
   private getPeymentListFromStore() {
     this.payementSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
-      console.log(data);
       if (data) {
         this.peyementUsersList = Object.values(data).filter((data) => data.status === 'inWork');
       }

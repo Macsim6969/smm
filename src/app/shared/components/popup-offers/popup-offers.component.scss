@@ -1,0 +1,114 @@
+.popup {
+  background-color: rgb(242 242 242 / 70%);;
+  position: fixed;
+  inset: 0;
+z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .popup-card {
+    background-color: #FFFFFF;
+    width: 472px;
+    border-radius: 8px;
+    box-shadow: none;
+    gap: 24px;
+
+    .popup-card-title {
+      width: 100%;
+
+      padding: 16px 0 16px;
+      border-bottom: 1px solid #E5E7E8;
+
+      p {
+        color: #000000;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        font-weight: 500;
+        padding-left: 24px;
+      }
+    }
+
+    .popup-card-content {
+      padding: 0 24px;
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+
+        .input-block {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          label {
+            color: #000000;
+            font-size: 1.4rem;
+            line-height: 2rem;
+            font-weight: 400;
+          }
+
+          input {
+            color: #A3AED0;
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 2rem;
+            outline: none;
+            padding: 10px 16px;
+            border: 1px solid #E5E7E8;
+            border-radius: 4px;
+          }
+        }
+
+        .form-bottom {
+          display: flex;
+          flex-direction: row;
+          gap: 16px;
+        }
+      }
+    }
+
+    .popup-card-actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .cansel{
+        cursor: pointer;
+        background-color: #F5F6F7;
+        border: none;
+        outline: none;
+        border-radius:160px;
+        padding: 0 24px;
+        line-height: 4rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+
+      .add{
+        cursor: pointer;
+        background: linear-gradient(90deg, #70A9FF 0%, #326EC9 53.5%, #0149B4 100%);
+        border: none;
+        outline: none;
+        border-radius:160px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 0 24px;
+
+        span{
+          line-height: 4rem;
+          font-size: 1.4rem;
+          font-weight: 600;
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}
+
