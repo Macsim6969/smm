@@ -3,11 +3,13 @@ import {BehaviorSubject} from "rxjs";
 import {PeyementList, UserData} from "../interfaces/backend.interface";
 import {CardHistory, CardInterface} from "../interfaces/card.interface";
 
-
+export interface whosePage {
+ rules: 'manager' | 'brand' | 'afiliat'
+}
 @Injectable()
 
 export class StoreService {
-  private whosePage: BehaviorSubject<'manager' | 'brand' | 'afiliat'> = new BehaviorSubject<'manager' | 'brand' | 'afiliat'>(null);
+  private whosePageSubject: BehaviorSubject<'manager' | 'brand' | 'afiliat'> = new BehaviorSubject<'manager' | 'brand' | 'afiliat'>(null);
   private idUserSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private userDataSubject: BehaviorSubject<UserData> = new BehaviorSubject<UserData>(null);
   private paymentListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
@@ -15,6 +17,15 @@ export class StoreService {
   private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   private usersCardsSubject: BehaviorSubject<CardInterface[]> = new BehaviorSubject<CardInterface[]>([]);
   private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
+  
+  set _whosePage(newId: 'manager' | 'brand' | 'afiliat'){
+    this.whosePageSubject.next(newId);
+  }
+
+  get _whosePage$(){
+    return this.whosePageSubject;
+  }
+  
   set _idUser(newId: string){
     this.idUserSubject.next(newId);
   }

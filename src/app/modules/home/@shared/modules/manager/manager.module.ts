@@ -5,6 +5,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {ShareModule} from "../../../../../shared/share.module";
 import {ProfileModule} from "../../../../../shared/modules/profile/profile.module";
 import {PayementListModule} from "../../../../../shared/modules/payement-list/payement-list.module";
+import { UsersSearchComponent } from "./@shared/components/users-search/users-search.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UsersSearchService } from "../../../../../shared/services/usersSearch.service";
 
 
 const routes: Routes = [
@@ -12,7 +15,8 @@ const routes: Routes = [
 ]
 @NgModule({
   declarations: [
-    ManagerComponent
+    ManagerComponent,
+    UsersSearchComponent
   ],
   exports: [],
   imports: [
@@ -20,8 +24,11 @@ const routes: Routes = [
     ShareModule,
     ProfileModule,
     PayementListModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [UsersSearchService]
 })
 
 export class ManagerModule {

@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StoreService } from '../../../../../shared/services/store.service';
 
 @Component({
   selector: 'app-profil',
@@ -6,5 +7,4 @@ import {Component} from '@angular/core';
   styleUrl: './profil.component.scss'
 })
 export class ProfilComponent {
-
 }

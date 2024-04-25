@@ -4,7 +4,6 @@ import {ProfilComponent} from "./profil.component";
 import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../../../../shared/share.module";
 import {ProfileModule} from "../../../../../shared/modules/profile/profile.module";
-import {ProfilIconService} from "../../../../../shared/modules/users-cards/services/profilIcon.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UsersCardsModule} from "../../../../../shared/modules/users-cards/users-cards.module";
 

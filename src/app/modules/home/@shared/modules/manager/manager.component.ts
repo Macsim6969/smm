@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
-import {Subscription} from "rxjs";
-import {ListIconService} from "../../../../../shared/modules/payement-list/list.service";
-import {StoreService} from "../../../../../shared/services/store.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PeyementList } from "../../../../../shared/interfaces/backend.interface";
+import { Subscription } from "rxjs";
+import { ListIconService } from "../../../../../shared/modules/payement-list/list.service";
+import { StoreService } from "../../../../../shared/services/store.service";
 
 @Component({
   selector: 'app-manager',
@@ -11,8 +11,9 @@ import {StoreService} from "../../../../../shared/services/store.service";
 })
 export class ManagerComponent implements OnInit, OnDestroy {
   public peyementList: PeyementList[];
-
+  public rules: 'manager' | 'brand' | 'afiliat';
   private payementSubscription: Subscription;
+  private rulesSubscription: Subscription;
 
   constructor(
     private listIconService: ListIconService,
@@ -21,11 +22,11 @@ export class ManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+    });
+    console.log(this.store._whosePage)
     this.getPeymentListFromStore();
-  }
-
-  ngOnDestroy() {
-    this.payementSubscription.unsubscribe();
   }
 
   private getPeymentListFromStore() {
@@ -35,5 +36,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
       }
 
     })
+  }
+
+  ngOnDestroy() {
+    this.payementSubscription.unsubscribe();
+    this.rulesSubscription.unsubscribe();
   }
 }

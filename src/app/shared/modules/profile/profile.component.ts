@@ -52,7 +52,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       } else {
         this.userData = data
       }
-     
     })
   }
 

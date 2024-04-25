@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersSearchService} from "../../services/usersSearch.service";
+import { UsersSearchService } from '../../../../../../../../shared/services/usersSearch.service';
 
 @Component({
   selector: 'app-users-search',

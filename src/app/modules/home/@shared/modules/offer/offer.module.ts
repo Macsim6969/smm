@@ -3,10 +3,12 @@ import { NgModule } from "@angular/core";
 import { ShareModule } from "../../../../../shared/share.module";
 import { RouterModule, Routes } from "@angular/router";
 import { OfferComponent } from "./offer.component";
-import { UsersSearchComponent } from "./@shared/components/users-search/users-search.component";
+
 import { PayementListModule } from "../../../../../shared/modules/payement-list/payement-list.module";
-import { FormsModule } from "@angular/forms";
-import { UsersSearchService } from "./@shared/services/usersSearch.service";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PopupOffersComponent } from "../../../../../shared/components/popup-offers/popup-offers.component";
+import { UsersSearchComponent } from "./@shared/components/users-search/users-search.component";
+import { UsersSearchService } from "../../../../../shared/services/usersSearch.service";
 
 const routes: Routes = [
   { path: '', component: OfferComponent }
@@ -15,6 +17,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     OfferComponent,
+    PopupOffersComponent,
     UsersSearchComponent
   ],
   exports: [],
@@ -22,6 +25,7 @@ const routes: Routes = [
     CommonModule,
     ShareModule,
     FormsModule,
+    ReactiveFormsModule,
     PayementListModule,
     RouterModule.forChild(routes)
   ],

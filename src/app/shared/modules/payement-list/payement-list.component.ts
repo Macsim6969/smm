@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ListIconService } from "./list.service";
 import { PeyementList } from "../../interfaces/backend.interface";
-import { UsersSearchService } from "../../../modules/home/@shared/modules/users/@shared/services/usersSearch.service";
 import { Subscription } from "rxjs";
 import { BackendService } from "../../services/backend.service";
+import { UsersSearchService } from '../../services/usersSearch.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-payement-list',
@@ -13,6 +14,7 @@ import { BackendService } from "../../services/backend.service";
 export class PayementListComponent implements OnInit, OnDestroy {
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
+  @Input() public rules: 'manager' | 'brand' | 'afiliat';
   public localId: any;
   public searchText: string;
   public rotate: boolean;
@@ -38,8 +40,10 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public changeManager(id: number) {
-    this.isChange = true;
-    this.isActiveId = id;
+    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+      this.isChange = true;
+      this.isActiveId = id;
+    }
   }
 
   public removeChange(id: number) {
@@ -65,9 +69,10 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public removeManager(id: number) {
-
-    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-    this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
+    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
+    }
   }
   public remove(id: number) {
     this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
