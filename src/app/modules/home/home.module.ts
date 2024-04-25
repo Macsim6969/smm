@@ -11,6 +11,7 @@ import {HeaderComponent} from "./@shared/components/header/header.component";
 const routes: Routes = [
   {path: '', component: HomeComponent, children: [
       {path: 'manager', loadChildren: () => import('./@shared/modules/manager/manager.module').then(m => m.ManagerModule)},
+      {path: 'added-offers', loadChildren: () => import('./@shared/modules/added-offers/added-offers.module').then(m => m.AddedOffersModule)},
       {path: 'offers', loadChildren: () => import('./@shared/modules/offer/offer.module').then(m => m.OfferModule)},
       {path: 'users', loadChildren: () => import('./@shared/modules/users/users.module').then(m => m.UsersModule)},
       {path: 'profil', loadChildren: () => import('./@shared/modules/profil/profil.module').then(m => m.ProfilModule)},
