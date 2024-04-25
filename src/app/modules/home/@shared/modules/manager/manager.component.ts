@@ -22,11 +22,14 @@ export class ManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getDataRulesFromStore();
+    this.getPeymentListFromStore();
+  }
+
+  private getDataRulesFromStore() {
     this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
       this.rules = data;
     });
-    console.log(this.store._whosePage)
-    this.getPeymentListFromStore();
   }
 
   private getPeymentListFromStore() {

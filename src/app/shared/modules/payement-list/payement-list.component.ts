@@ -75,16 +75,20 @@ export class PayementListComponent implements OnInit, OnDestroy {
     }
   }
   public remove(id: number) {
-    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-    this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
+    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+      this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
+    }
   }
 
   public compleate(id) {
-    const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
-    const newComplete = { ...completeList }
-    newComplete.status = 'przyłączać'
-    this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
-    this.remove(id);
+    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+      const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
+      const newComplete = { ...completeList }
+      newComplete.status = 'przyłączać'
+      this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
+      this.remove(id);
+    }
   }
 
   sortBy(field: string) {

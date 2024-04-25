@@ -11,14 +11,23 @@ import { PeyementList } from '../../../../../shared/interfaces/backend.interface
 })
 export class OfferComponent implements OnInit, OnDestroy {
   public peyementUsersList: PeyementList[];
-
+  public rules: 'manager' | 'brand' | 'afiliat';
+  
+  private rulesSubscription: Subscription;
   private payementSubscription: Subscription;
   constructor(
     private listIconService: ListIconService,
     private store: StoreService
   ) { }
   ngOnInit() {
+    this.getDataRulesFromStore();
     this.getPeymentListFromStore();
+  }
+
+  private getDataRulesFromStore() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+    });
   }
 
   private getPeymentListFromStore() {

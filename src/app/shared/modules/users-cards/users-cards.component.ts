@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {CardInterface} from "../../interfaces/card.interface";
-import {ProfilIconService} from "./services/profilIcon.service";
-import {StoreService} from "../../services/store.service";
-import {UsersCardsService} from "../../services/usersCards.service";
-import {Router} from "@angular/router";
-import {Observable, Subscription, timer} from "rxjs";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { CardInterface } from "../../interfaces/card.interface";
+import { ProfilIconService } from "./services/profilIcon.service";
+import { StoreService } from "../../services/store.service";
+import { UsersCardsService } from "../../services/usersCards.service";
+import { Router } from "@angular/router";
+import { Observable, Subscription, timer } from "rxjs";
 
 @Component({
   selector: 'app-users-cards',
@@ -12,20 +12,29 @@ import {Observable, Subscription, timer} from "rxjs";
   styleUrl: './users-cards.component.scss'
 })
 export class UsersCardsComponent implements OnInit, OnDestroy {
-   @Input() public isProfile: boolean;
+  @Input() public isProfile: boolean;
   public cardPopup: boolean = false
   public cards: CardInterface[];
   public activeCard: number = 0;
+  private rules: 'manager' | 'brand' | 'afiliat';
 
-private userCardsSubscription: Subscription;
+  private userCardsSubscription: Subscription;
+  private rulesSubscription: Subscription;
   constructor(private profilIcon: ProfilIconService,
-              private store: StoreService,
-              private usersCard: UsersCardsService,
-              private router:Router) {
+    private store: StoreService,
+    private usersCard: UsersCardsService,
+    private router: Router) {
   }
 
   ngOnInit() {
+    this.getRulesDataFromStore();
     this.getCardUsers();
+  }
+
+  private getRulesDataFromStore() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+    });
   }
 
   private getCardUsers() {
@@ -37,9 +46,9 @@ private userCardsSubscription: Subscription;
   public choiceCard(id: number, idCard: number) {
     this.usersCard._userActiveCard = id;
     this.activeCard = idCard;
-      if(this.isProfile){
-        this.router.navigate(['/oscillate']).then();
-      }
+    if (this.isProfile) {
+      this.router.navigate(['/oscillate']).then();
+    }
   }
 
   public closePopup(event: boolean) {
@@ -56,8 +65,10 @@ private userCardsSubscription: Subscription;
   }
 
   public openCardPopup() {
-    document.body.style.overflow = 'hidden';
-    this.cardPopup = true;
+    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+      document.body.style.overflow = 'hidden';
+      this.cardPopup = true;
+    }
   }
 
   ngOnDestroy() {
