@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from "../../shared/services/backend.service";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
-  constructor(private backendService: BackendService) { }
-
+export class HomeComponent implements OnInit, OnDestroy {
+  private rulesSubscription: Subscription;
+  constructor(
+    private backendService: BackendService
+  ) { }
   ngOnInit() {
     this.initializeUserData();
     this.initializePeymentList();
@@ -30,4 +33,8 @@ export class HomeComponent implements OnInit {
     this.backendService.getOffers(localId.localId);
   }
 
+
+  ngOnDestroy(): void {
+    this.rulesSubscription.unsubscribe();
+  }
 }

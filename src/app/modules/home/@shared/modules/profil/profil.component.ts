@@ -7,4 +7,6 @@ import { StoreService } from '../../../../../shared/services/store.service';
   styleUrl: './profil.component.scss'
 })
 export class ProfilComponent {
+
+
 }

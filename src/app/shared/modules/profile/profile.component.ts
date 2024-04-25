@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { StoreService } from "../../services/store.service";
 import { UserData } from "../../interfaces/backend.interface";
 import { Subscription } from "rxjs";
@@ -11,6 +11,7 @@ import { BackendService } from "../../services/backend.service";
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  private rules: 'manager' | 'brand' | 'afiliat';
   public userData: UserData;
   public isEditProfil: boolean
   public email: string;
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public address: string;
   public number: string;
   private userDataSubscription: Subscription;
+  private rulesSubscription: Subscription;
 
   constructor(
     private store: StoreService,
@@ -29,10 +31,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUserDataFromStore();
+    this.getDataRulesFromStore();
+  }
+
+  private getDataRulesFromStore() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+    });
   }
 
   public edit() {
-    this.isEditProfil = !this.isEditProfil;
+    if (this.rules !== 'afiliat') {
+      this.isEditProfil = !this.isEditProfil;
+    }
   }
 
   public save() {
@@ -43,6 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userDataSubscription.unsubscribe();
+    this.rulesSubscription.unsubscribe();
   }
 
   private getUserDataFromStore() {

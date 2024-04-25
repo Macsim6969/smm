@@ -14,7 +14,6 @@ export class OfferComponent implements OnInit, OnDestroy {
   public rules: 'manager' | 'brand' | 'afiliat';
 
   private rulesSubscription: Subscription;
-  private payementSubscription: Subscription;
   private offersSubscription: Subscription
   constructor(
     private listIconService: ListIconService,
@@ -22,28 +21,16 @@ export class OfferComponent implements OnInit, OnDestroy {
   ) { }
   ngOnInit() {
     this.getDataRulesFromStore();
-    this.getPeymentListFromStore();
+    this.getOffersFromStore()
   }
 
   private getDataRulesFromStore() {
     this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
       this.rules = data;
-      if (data === 'manager') {
-        this.getDataRulesFromStore()
-      } else {
-        this.getOffersFromStore();
-      }
+
     });
   }
 
-  private getPeymentListFromStore() {
-    this.payementSubscription = this.store._payementUsersList$.subscribe((data: PeyementList[]) => {
-      if (data) {
-        this.peyementUsersList = Object.values(data);
-      }
-
-    })
-  }
 
   private getOffersFromStore() {
     this.offersSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
@@ -54,7 +41,6 @@ export class OfferComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.payementSubscription.unsubscribe();
     this.offersSubscription.unsubscribe();
     this.rulesSubscription.unsubscribe();
   }
