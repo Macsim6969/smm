@@ -40,7 +40,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public changeManager(id: number) {
-    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+    if (this.rules !== 'brand') {
       this.isChange = true;
       this.isActiveId = id;
     }
@@ -69,24 +69,36 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public removeManager(id: number) {
-    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+    if (this.rules !== 'brand') {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
       this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
     }
   }
   public remove(id: number) {
-    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+    if (this.rules === 'manager') {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
       this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
+    } else if (this.rules === 'afiliat') {
+      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+      this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
   }
 
   public compleate(id) {
-    if (this.rules !== 'brand' && this.rules !== 'afiliat') {
+    if (this.rules === 'manager') {
       const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
       const newComplete = { ...completeList }
       newComplete.status = 'przyłączać'
       this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
+      this.remove(id);
+    } else if (this.rules === 'afiliat') {
+      const index = this.peyementList.findIndex(data => data.UI_id === id);
+      if (index !== -1) {
+        const updatedItem = { ...this.peyementList[index] };
+        updatedItem.status = 'active';
+        this.peyementList[index] = updatedItem;
+        this.backendService.sendOffers(this.localId.localId, this.peyementList);
+      }
       this.remove(id);
     }
   }

@@ -1,25 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ListIconService } from '../../../../../shared/modules/payement-list/list.service';
-import { StoreService } from '../../../../../shared/services/store.service';
 import { Subscription } from 'rxjs';
 import { PeyementList } from '../../../../../shared/interfaces/backend.interface';
+import { StoreService } from '../../../../../shared/services/store.service';
 
 @Component({
-  selector: 'app-offer',
-  templateUrl: './offer.component.html',
-  styleUrl: './offer.component.scss'
+  selector: 'app-afiliat',
+  templateUrl: './afiliat.component.html',
+  styleUrl: './afiliat.component.scss'
 })
-export class OfferComponent implements OnInit, OnDestroy {
-  public peyementUsersList: PeyementList[];
+export class AfiliatComponent implements OnInit, OnDestroy {
+  public peyementList: PeyementList[];
   public rules: 'manager' | 'brand' | 'afiliat';
-
-  private rulesSubscription: Subscription;
   private payementSubscription: Subscription;
-  private offersSubscription: Subscription
+  private rulesSubscription: Subscription;
+
   constructor(
     private listIconService: ListIconService,
     private store: StoreService
-  ) { }
+  ) {
+  }
+
   ngOnInit() {
     this.getDataRulesFromStore();
     this.getPeymentListFromStore();
@@ -28,34 +29,21 @@ export class OfferComponent implements OnInit, OnDestroy {
   private getDataRulesFromStore() {
     this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
       this.rules = data;
-      if (data !== 'afiliat') {
-        this.getDataRulesFromStore()
-      } else {
-        this.getOffersFromStore();
-      }
     });
   }
 
   private getPeymentListFromStore() {
-    this.payementSubscription = this.store._payementUsersList$.subscribe((data: PeyementList[]) => {
+    this.payementSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
       if (data) {
-        this.peyementUsersList = Object.values(data);
+        this.peyementList = Object.values(data).filter((data) => data.status === 'active');
+        console.log(Object.values(data).filter((data) => data.status === 'active'))
       }
 
-    })
-  }
-
-  private getOffersFromStore() {
-    this.offersSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
-      if (data) {
-        this.peyementUsersList = (data);
-      }
     })
   }
 
   ngOnDestroy() {
     this.payementSubscription.unsubscribe();
-    this.offersSubscription.unsubscribe();
     this.rulesSubscription.unsubscribe();
   }
 }

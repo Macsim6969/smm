@@ -17,6 +17,8 @@ export class StoreService {
   private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
   private usersCardsSubject: BehaviorSubject<CardInterface[]> = new BehaviorSubject<CardInterface[]>([]);
   private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
+
+  private offersSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>([]);
   
   set _whosePage(newId: 'manager' | 'brand' | 'afiliat'){
     this.whosePageSubject.next(newId);
@@ -81,5 +83,14 @@ export class StoreService {
 
   get _userCardsHistory$(){
     return this.usersCardsHistorySubject;
+  }
+
+  ///
+  set _offer(newOffer: PeyementList[]) {
+    this.offersSubject.next(newOffer);
+  }
+
+  get _offer$(){
+    return this.offersSubject;
   }
 }

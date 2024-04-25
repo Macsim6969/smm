@@ -10,6 +10,7 @@ export  class SidebarIconService{
               private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon('logo', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/auth/logo.svg'));
 
+    this.matIconRegistry.addSvgIcon('group', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/group.svg'));
     this.matIconRegistry.addSvgIcon('manager', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/manager.svg'));
     this.matIconRegistry.addSvgIcon('offers', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/offer.svg'));
     this.matIconRegistry.addSvgIcon('profil', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/profil.svg'));

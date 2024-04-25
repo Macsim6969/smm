@@ -21,9 +21,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
       route: "/manager"
     },
     {
+      icon: "group",
+      title: "Przyłączać",
+      route: "/affiliate"
+    },
+    
+    {
       icon: "offers",
       title: "Oferty w przygotowaniu",
-      route: "/added-offers"
+      route: "/added-processing"
     },
     {
       icon: "users",

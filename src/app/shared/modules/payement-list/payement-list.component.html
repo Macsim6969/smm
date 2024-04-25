@@ -42,7 +42,7 @@
     <p *ngIf="classUrl === 'users'">{{lists.oscillate}}</p>
     <p *ngIf="classUrl === 'users'">{{lists.status}}</p>
     <p *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
-    <p *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number" >{{ lists.number }}</p>
+    <p *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number" >${{ lists.number }}</p>
     <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
     <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
       <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>

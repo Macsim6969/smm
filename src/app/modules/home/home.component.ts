@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
     this.backendService.getPeyementUsersList(localId.localId);
     this.backendService.getNewUsersCard(localId.localId);
     this.backendService.getUserCardsHistory(localId.localId);
+    //
+    this.backendService.getOffers(localId.localId);
   }
 
 }
