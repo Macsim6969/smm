@@ -7,7 +7,7 @@
       <mat-icon svgIcon="search"></mat-icon>
       <input placeholder="Szukaj" type="Szukaj" (input)="sendSearch()" [(ngModel)]="searchText">
     </div>
-    <div class="actions">
+    <div class="actions" (click)="addedOffers()">
       Dodaj ofertę
     </div>
   </div>

@@ -11,14 +11,16 @@ import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
 })
 export class UsersComponent implements OnInit, OnDestroy{
   public peyementUsersList: PeyementList[];
-
+  public rules: 'manager' | 'brand' | 'afiliat';
   private payementSubscription: Subscription;
+  private rulesSubscription: Subscription;
   constructor(
     private listIconService: ListIconService,
     private store: StoreService
   ) {}
   ngOnInit() {
     this.getPeymentListFromStore();
+    this.getDataRulesFromStore();
   }
 
   private getPeymentListFromStore(){
@@ -27,7 +29,14 @@ export class UsersComponent implements OnInit, OnDestroy{
         this.peyementUsersList = Object.values(data);
       }
 
-    })
+    }) 
+  }
+
+  private getDataRulesFromStore() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+
+    });
   }
 
   ngOnDestroy() {
