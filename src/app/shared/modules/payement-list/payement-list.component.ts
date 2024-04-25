@@ -15,6 +15,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
   @Input() public peyementList: PeyementList[];
   @Input() public classUrl: string;
   @Input() public rules: 'manager' | 'brand' | 'afiliat';
+  @Input() public isWork: boolean;
   public localId: any;
   public searchText: string;
   public rotate: boolean;
@@ -78,7 +79,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
     if (this.rules === 'manager') {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
       this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
-    } else if (this.rules === 'afiliat') {
+    } else if (this.rules === 'afiliat' && this.isWork) {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
       this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
@@ -91,7 +92,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
       newComplete.status = 'przyłączać'
       this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
       this.remove(id);
-    } else if (this.rules === 'afiliat') {
+    } else if (this.rules === 'afiliat' && this.isWork) {
       const index = this.peyementList.findIndex(data => data.UI_id === id);
       if (index !== -1) {
         const updatedItem = { ...this.peyementList[index] };
