@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private initializePeymentList() {
     const localId = JSON.parse(localStorage.getItem('userData'));
-    this.backendService.getPeyementList(localId.localId);
-    this.backendService.getPeyementUsersListComplete(localId.localId);
-    this.backendService.getPeyementUsersList(localId.localId);
+    // this.backendService.getPeyementList(localId.localId);
+    // this.backendService.getPeyementUsersListComplete(localId.localId);
+    // this.backendService.getPeyementUsersList(localId.localId);
     this.backendService.getNewUsersCard(localId.localId);
     this.backendService.getUserCardsHistory(localId.localId);
     //

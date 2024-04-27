@@ -24,9 +24,9 @@ export class BackendService {
       if (keysCount === 1) {
         this.store._userData = data;
         this.store._whosePage = Object.values(data)[0].rules;
-      } else {
-        this.store._userData = data;
+      } else if (data) {
         this.store._whosePage = data.rules;
+        this.store._userData = data;
       }
     });
   }
@@ -47,42 +47,6 @@ export class BackendService {
   public getOffers(userId: string) {
     return this.http.get<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/offers.json`).subscribe((data: PeyementList[]) => {
       this.store._offer = data;
-    })
-  }
-
-  public sendPeyementList(userId: string, peymentList: PeyementList[]) {
-    return this.http.put<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/paymentList.json`, peymentList).subscribe(() => {
-      this.getPeyementList(userId);
-    })
-  }
-
-  public getPeyementList(userId: string) {
-    return this.http.get<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/paymentList.json`).subscribe((data: PeyementList[]) => {
-      this.store._payementList = data;
-    })
-  }
-
-  public sendPeyementUsersListToComplete(userId: string, peymentList: PeyementList) {
-    return this.http.post<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/completePeyment.json`, peymentList).subscribe(() => {
-      this.getPeyementUsersListComplete(userId);
-    });
-  }
-
-  public getPeyementUsersListComplete(userId: string) {
-    return this.http.get<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/completePeyment.json`).subscribe((data: PeyementList[]) => {
-      this.store._payemenUserstListComplete = data;
-    })
-  }
-
-  public sendPeyementUsersList(userId: string, peymentList: PeyementList[]) {
-    return this.http.put<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/paymentUsersList.json`, peymentList).subscribe(() => {
-      this.getPeyementUsersList(userId);
-    })
-  }
-
-  public getPeyementUsersList(userId: string) {
-    return this.http.get<PeyementList[]>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}/paymentUsersList.json`).subscribe((data: PeyementList[]) => {
-      this.store._payemenUserstList = data;
     })
   }
 

@@ -71,7 +71,7 @@ export class PopupOffersComponent {
 
       formData['UI_id'] = lenght + 1;
       formData['payment_id'] = this.generateRandomId(10);
-      this.backend.sendPeyementUsersListToComplete(localId.localId, formData);
+     this.backend.sendOffer(localId.localId, formData);
       this.isPopupService._isOfferPopup = false;
     }
   }

@@ -35,7 +35,11 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
   private streamUserActiveCards(){
     this.userActiveCardSubscription = this.usersCards._userActiveCard$.subscribe(data => {
-      this.activeCard = data;
+      if(data){
+        this.activeCard = data;
+      } else {
+        this.activeCard = 1
+      }
       this.changeCard();
     })
   }

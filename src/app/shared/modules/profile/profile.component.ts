@@ -102,10 +102,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       password: this.password,
       address: this.address,
       number: this.number,
-      rules: this.store._whosePage
+      rules: this.store._whosePage$.getValue()
     }
-    this.backendService.sendNewDataUser(localId.localId, newUserData);
 
+    this.backendService.sendNewDataUser(localId.localId, newUserData);
   }
 
 }

@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
-import {PeyementList, UserData} from "../interfaces/backend.interface";
-import {CardHistory, CardInterface} from "../interfaces/card.interface";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { PeyementList, UserData } from "../interfaces/backend.interface";
+import { CardHistory, CardInterface } from "../interfaces/card.interface";
 import { Users } from "../../modules/home/@shared/modules/users/@shared/interface/user.interface";
 
 export interface whosePage {
- rules: 'manager' | 'brand' | 'afiliat'
+  rules: 'manager' | 'brand' | 'afiliat'
 }
 @Injectable()
 
@@ -13,70 +13,44 @@ export class StoreService {
   private whosePageSubject: BehaviorSubject<'manager' | 'brand' | 'afiliat'> = new BehaviorSubject<'manager' | 'brand' | 'afiliat'>(null);
   private idUserSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private userDataSubject: BehaviorSubject<UserData> = new BehaviorSubject<UserData>(null);
-  private paymentListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
-  private paymentUsersListsCompleteSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
-  private paymentUsersListsSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>(null);
+ 
   private usersCardsSubject: BehaviorSubject<CardInterface[]> = new BehaviorSubject<CardInterface[]>([]);
   private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
 
   private offersSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>([]);
 
   private allUsersSubject: BehaviorSubject<Users[]> = new BehaviorSubject<Users[]>(null);
-  
-  set _whosePage(newId: 'manager' | 'brand' | 'afiliat'){
+
+  set _whosePage(newId: 'manager' | 'brand' | 'afiliat') {
     this.whosePageSubject.next(newId);
   }
 
-  get _whosePage$(){
+  get _whosePage$() {
     return this.whosePageSubject;
   }
-  
-  set _idUser(newId: string){
+
+  set _idUser(newId: string) {
     this.idUserSubject.next(newId);
   }
 
-  get _idUser$(){
+  get _idUser$() {
     return this.idUserSubject;
   }
 
-  set _userData(newUser: UserData){
+  set _userData(newUser: UserData) {
     this.userDataSubject.next(newUser);
   }
 
-  get _userData$(){
+  get _userData$() {
     return this.userDataSubject;
   }
 
-  set _payementList(newLists: PeyementList[]){
-    this.paymentListsSubject.next(newLists);
-  }
-
-  get _payementList$(){
-    return this.paymentListsSubject;
-  }
-
-  set _payemenUserstListComplete(newLists: PeyementList[]){
-    this.paymentUsersListsCompleteSubject.next(newLists);
-  }
-
-  get _payementUsersListComplete$(){
-    return this.paymentUsersListsCompleteSubject;
-  }
-
-
-  set _payemenUserstList(newLists: PeyementList[]){
-    this.paymentUsersListsSubject.next(newLists);
-  }
-
-  get _payementUsersList$(){
-    return this.paymentUsersListsSubject;
-  }
 
   set _userCards(newCard: CardInterface[]) {
     this.usersCardsSubject.next(newCard);
   }
 
-  get _userCards$(){
+  get _userCards$() {
     return this.usersCardsSubject;
   }
 
@@ -84,7 +58,7 @@ export class StoreService {
     this.usersCardsHistorySubject.next(newCard);
   }
 
-  get _userCardsHistory$(){
+  get _userCardsHistory$() {
     return this.usersCardsHistorySubject;
   }
 
@@ -93,7 +67,7 @@ export class StoreService {
     this.offersSubject.next(newOffer);
   }
 
-  get _offer$(){
+  get _offer$() {
     return this.offersSubject;
   }
 
@@ -101,7 +75,7 @@ export class StoreService {
     this.allUsersSubject.next(newOffer);
   }
 
-  get _allUsers$(){
+  get _allUsers$() {
     return this.allUsersSubject;
   }
 }

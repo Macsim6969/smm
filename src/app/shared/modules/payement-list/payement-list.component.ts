@@ -4,7 +4,6 @@ import { PeyementList } from "../../interfaces/backend.interface";
 import { Subscription } from "rxjs";
 import { BackendService } from "../../services/backend.service";
 import { UsersSearchService } from '../../services/usersSearch.service';
-import { StoreService } from '../../services/store.service';
 import { ListIconService } from '../../services/list.service';
 
 @Component({
@@ -64,7 +63,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
       updatedData.name = this.name;
       updatedData.number = this.pay;
       this.peyementList[index] = updatedData;
-      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
+      this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
     this.removeChange(id);
   }
@@ -72,35 +71,27 @@ export class PayementListComponent implements OnInit, OnDestroy {
   public removeManager(id: number) {
     if (this.rules !== 'brand') {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
+      this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
   }
   public remove(id: number) {
     if (this.rules === 'manager') {
-      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-      this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
-    } else if (this.rules === 'afiliat' && this.isWork) {
       this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
       this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
   }
 
   public compleate(id) {
-    if (this.rules === 'manager') {
-      const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
-      const newComplete = { ...completeList }
-      newComplete.status = 'przyłączać'
-      this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
-      this.remove(id);
-    } else if (this.rules === 'afiliat' && this.isWork) {
+    console.log(1)
+    if (this.rules !== 'brand' && this.isWork) {
       const index = this.peyementList.findIndex(data => data.UI_id === id);
       if (index !== -1) {
         const updatedItem = { ...this.peyementList[index] };
-        updatedItem.status = 'active';
+        updatedItem.status = 'inWork';
         this.peyementList[index] = updatedItem;
         this.backendService.sendOffers(this.localId.localId, this.peyementList);
+        this.peyementList = this.peyementList.filter((data) => data.status === '')
       }
-      this.remove(id);
     }
   }
 
