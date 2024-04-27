@@ -1,12 +1,15 @@
 export interface UserData{
-  name: string
+  name?: string
   userID?: string
-  email: string
+  email?: string
   password: string
   address?: string
   number?: string
   image?: string
   rules?: 'manager' | 'brand' | 'afiliat'
+  clicks?: number
+  decommissioned?: number
+  balanc?: number
 }
 
 export interface PeyementList{

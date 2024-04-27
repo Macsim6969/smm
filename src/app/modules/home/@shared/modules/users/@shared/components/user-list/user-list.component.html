@@ -38,12 +38,12 @@
       <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
       <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
       <p class="country">{{lists.address}}</p>
-      <p class="pay">{{lists.pay}}</p>
-      <p class="osc"> {{lists.oscillate}}</p>
+      <p class="pay">{{lists.decommissioned}}</p>
+      <p class="osc"> {{lists.balanc}}</p>
       <p class="status">{{lists.rules}}</p>  
     </div>
     <div class="settings" [ngClass]="{'active': i == isActiveId}">
-      <app-settings class="setting-content"></app-settings>>
+      <app-settings [decommissioned]="lists.decommissioned" [balanc]="lists.balanc" [clicks]="lists.clicks" class="setting-content" [user]="lists" ></app-settings>>
     </div>
   </div>
 </div>

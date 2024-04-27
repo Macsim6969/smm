@@ -13,6 +13,7 @@ export class BackendService {
   constructor(private http: HttpClient,
     private store: StoreService) {
   }
+
   public sendUserProfile(userData: UserData) {
     return this.http.put<UserData>(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userData.userID}/profile.json`, userData).subscribe();
   }
@@ -110,6 +111,17 @@ export class BackendService {
   }
 
   public getAllUsers() {
-    return this.http.get<Users>(`https://smm-oksima-default-rtdb.firebaseio.com/users.json`)
+    return this.http.get<Users>(`https://smm-oksima-default-rtdb.firebaseio.com/users.json`).subscribe((data) => {
+      const usersArray = Object.values(data).map(obj => {
+        const profileValues = Object.values(obj.profile);
+        if (profileValues.length === 1) {
+          return profileValues[0];
+        } else {
+          return obj.profile;
+        }
+
+      });
+      this.store._allUsers = usersArray.filter((data) => data.rules !== 'manager');
+    })
   }
 }

@@ -14,6 +14,7 @@ import { Users, UsersList } from './@shared/interface/user.interface';
 export class UsersComponent implements OnInit, OnDestroy {
   public usersList: UsersList[] | any;
   private payementSubscription: Subscription;
+  public isLoading: boolean = true;
   constructor(
     private listIconService: ListIconService,
     private store: StoreService,
@@ -21,20 +22,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   ) { }
   ngOnInit() {
 
-    this.payementSubscription = this.backend.getAllUsers().subscribe((data) => {
-      const usersArray = Object.values(data).map(obj => {
-        const profileValues = Object.values(obj.profile);
-        if (profileValues.length === 1) {
-          return profileValues[0];
-        } else {
-          return obj.profile;
-        }
-      });
-      console.log(usersArray);
-      this.usersList = usersArray;
-    });
+    this.payementSubscription = this.backend.getAllUsers()
+    this.store._allUsers$.subscribe((data) => {
+      this.usersList = data;
+      this.isLoading = false;
+    })
   }
-
 
   ngOnDestroy() {
     this.payementSubscription.unsubscribe();

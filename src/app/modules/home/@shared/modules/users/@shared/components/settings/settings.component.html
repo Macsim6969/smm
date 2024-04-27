@@ -1,9 +1,13 @@
 <section class="header">
-  <div class="header-item" *ngFor="let header of headerItems">
+  <div class="header-item" *ngFor="let header of headerItems; index as i" (click)="changeData(i+1)"
+    [ngClass]="{'active': activeId === i+1, 'hide': activeId !== i+1}">
     <p class="header-text">{{header.title}}</p>
+    <input *ngIf="activeId === 1" type="number" [value]="user.clicks" [(ngModel)]="clicks">
+    <input *ngIf="activeId === 2" type="number" [value]="user.decommissioned" [(ngModel)]="decommissioned">
+    <input *ngIf="activeId === 3" type="number" [value]="user.balanc" [(ngModel)]="balanc">
+    <button *ngIf="activeId === i+1" (click)="save(i)">Save</button>
     <div class="header-icon">
       <mat-icon svgIcon="{{header.icon}}"></mat-icon>
     </div>
   </div>
 </section>
-  

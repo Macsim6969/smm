@@ -1,15 +1,20 @@
-export interface Users{
+export interface Users {
   activeOffers: any
   completePeyment: any
   offers: any
   profile: any
 }
 
-export interface UsersList{
-  address: string
+export interface UsersList {
+  name?: string
+  userID?: string
   email: string
-  name: string
-  number: number
-  userID: string
-  rules: string
+  password: string
+  address?: string
+  number?: string
+  image?: string
+  rules?: 'manager' | 'brand' | 'afiliat'
+  clicks?: number
+  decommissioned?: number
+  balanc?: number
 }

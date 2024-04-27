@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {PeyementList, UserData} from "../interfaces/backend.interface";
 import {CardHistory, CardInterface} from "../interfaces/card.interface";
+import { Users } from "../../modules/home/@shared/modules/users/@shared/interface/user.interface";
 
 export interface whosePage {
  rules: 'manager' | 'brand' | 'afiliat'
@@ -19,6 +20,8 @@ export class StoreService {
   private usersCardsHistorySubject: BehaviorSubject<CardHistory[]> = new BehaviorSubject<CardHistory[]>([]);
 
   private offersSubject: BehaviorSubject<PeyementList[]> = new BehaviorSubject<PeyementList[]>([]);
+
+  private allUsersSubject: BehaviorSubject<Users[]> = new BehaviorSubject<Users[]>(null);
   
   set _whosePage(newId: 'manager' | 'brand' | 'afiliat'){
     this.whosePageSubject.next(newId);
@@ -92,5 +95,13 @@ export class StoreService {
 
   get _offer$(){
     return this.offersSubject;
+  }
+
+  set _allUsers(newOffer: Users[]) {
+    this.allUsersSubject.next(newOffer);
+  }
+
+  get _allUsers$(){
+    return this.allUsersSubject;
   }
 }

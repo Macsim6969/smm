@@ -8,6 +8,7 @@ import {MatInputModule} from "@angular/material/input";
 import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { MatList, MatListItem } from "@angular/material/list";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatList, MatListItem } from "@angular/material/list";
     CurrencyStarPipe,
     MatDatepickerToggle,
     MatDatepicker,
-    MatDatepickerInput
+    MatDatepickerInput,
+    MatProgressSpinnerModule
   ],
   imports: [
     MatList,
@@ -49,7 +51,8 @@ import { MatList, MatListItem } from "@angular/material/list";
     MatCardActions,
     MatDatepickerToggle,
     MatDatepicker,
-    MatDatepickerInput
+    MatDatepickerInput,
+    MatProgressSpinnerModule
   ]
 })
 

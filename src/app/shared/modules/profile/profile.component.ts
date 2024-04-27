@@ -95,6 +95,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private setDataToStore() {
     const localId = JSON.parse(localStorage.getItem('userData'));
     const newUserData: UserData = {
+      ...this.userData,
       userID: this.userData.userID,
       email: this.email,
       name: this.name,
