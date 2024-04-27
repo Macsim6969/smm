@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PeyementList } from '../../../../../shared/interfaces/backend.interface';
-import { ListIconService } from '../../../../../shared/modules/payement-list/list.service';
 import { StoreService } from '../../../../../shared/services/store.service';
+import { ListIconService } from '../../../../../shared/services/list.service';
 
 @Component({
   selector: 'app-marka',

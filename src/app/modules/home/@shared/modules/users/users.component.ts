@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ListIconService} from "../../../../../shared/modules/payement-list/list.service";
 import {StoreService} from "../../../../../shared/services/store.service";
 import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
+import { ListIconService } from '../../../../../shared/services/list.service';
 
 @Component({
   selector: 'app-users',
@@ -11,16 +11,13 @@ import {PeyementList} from "../../../../../shared/interfaces/backend.interface";
 })
 export class UsersComponent implements OnInit, OnDestroy{
   public peyementUsersList: PeyementList[];
-  public rules: 'manager' | 'brand' | 'afiliat';
   private payementSubscription: Subscription;
-  private rulesSubscription: Subscription;
   constructor(
     private listIconService: ListIconService,
     private store: StoreService
   ) {}
   ngOnInit() {
     this.getPeymentListFromStore();
-    this.getDataRulesFromStore();
   }
 
   private getPeymentListFromStore(){
@@ -30,13 +27,6 @@ export class UsersComponent implements OnInit, OnDestroy{
       }
 
     }) 
-  }
-
-  private getDataRulesFromStore() {
-    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
-      this.rules = data;
-
-    });
   }
 
   ngOnDestroy() {

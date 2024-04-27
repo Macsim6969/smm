@@ -8,6 +8,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {StoreService} from "./shared/services/store.service";
 import {BackendService} from "./shared/services/backend.service";
+import { ListIconService } from './shared/services/list.service';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {BackendService} from "./shared/services/backend.service";
   providers:[
     provideAnimationsAsync(),
     StoreService,
-    BackendService
+    BackendService,
+    ListIconService
   ],
   bootstrap: [AppComponent]
 })

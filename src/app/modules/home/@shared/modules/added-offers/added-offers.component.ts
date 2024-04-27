@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { PeyementList } from '../../../../../shared/interfaces/backend.interface';
 import { Subscription } from 'rxjs';
-import { ListIconService } from '../../../../../shared/modules/payement-list/list.service';
 import { StoreService } from '../../../../../shared/services/store.service';
+import { ListIconService } from '../../../../../shared/services/list.service';
 
 @Component({
   selector: 'app-added-offers',

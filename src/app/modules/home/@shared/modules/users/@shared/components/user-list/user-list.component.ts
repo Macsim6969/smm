@@ -1,22 +1,19 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-
-import { PeyementList } from "../../interfaces/backend.interface";
-import { Subscription } from "rxjs";
-import { BackendService } from "../../services/backend.service";
-import { UsersSearchService } from '../../services/usersSearch.service';
-import { StoreService } from '../../services/store.service';
-import { ListIconService } from '../../services/list.service';
+import { PeyementList } from '../../../../../../../../shared/interfaces/backend.interface';
+import { Subscription } from 'rxjs';
+import { UsersSearchService } from '../../../../../../../../shared/services/usersSearch.service';
+import { BackendService } from '../../../../../../../../shared/services/backend.service';
+import { ListIconService } from '../../../../../../../../shared/services/list.service';
 
 @Component({
-  selector: 'app-payement-list',
-  templateUrl: './payement-list.component.html',
-  styleUrls: ['./payement-list.component.scss']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.scss'
 })
-export class PayementListComponent implements OnInit, OnDestroy {
+export class UserListComponent implements OnInit, OnDestroy {
   @Input() public peyementList: PeyementList[];
-  @Input() public classUrl: string;
-  @Input() public rules: 'manager' | 'brand' | 'afiliat';
   @Input() public isWork: boolean;
+  public settingsActiveId: number;
   public localId: any;
   public searchText: string;
   public rotate: boolean;
@@ -26,6 +23,7 @@ export class PayementListComponent implements OnInit, OnDestroy {
   public pay: number;
   private reverseSort: boolean = false;
 
+  public isSetting: boolean
   private searchSubscription: Subscription;
 
   constructor(
@@ -33,19 +31,20 @@ export class PayementListComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userSearch: UsersSearchService,
     private backendService: BackendService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.localId = JSON.parse(localStorage.getItem('userData'));
     this.streamSearchText();
   }
 
-  public changeManager(id: number) {
-    if (this.rules !== 'brand') {
-      this.isChange = true;
-      this.isActiveId = id;
-    }
+  private streamSearchText() {
+    this.searchSubscription = this.userSearch._searchText$.subscribe((data) => this.searchText = data);
+  }
+
+  public openSettings(id: number) {
+    this.isSetting = true;
+    this.isActiveId = id;
   }
 
   public removeChange(id: number) {
@@ -70,38 +69,8 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public removeManager(id: number) {
-    if (this.rules !== 'brand') {
-      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
-    }
-  }
-  public remove(id: number) {
-    if (this.rules === 'manager') {
-      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-      this.backendService.sendPeyementUsersList(this.localId.localId, this.peyementList);
-    } else if (this.rules === 'afiliat' && this.isWork) {
-      this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-      this.backendService.sendOffers(this.localId.localId, this.peyementList);
-    }
-  }
-
-  public compleate(id) {
-    if (this.rules === 'manager') {
-      const completeList = this.peyementList.filter((data) => data.UI_id === id)[0];
-      const newComplete = { ...completeList }
-      newComplete.status = 'przyłączać'
-      this.backendService.sendPeyementUsersListToComplete(this.localId.localId, newComplete);
-      this.remove(id);
-    } else if (this.rules === 'afiliat' && this.isWork) {
-      const index = this.peyementList.findIndex(data => data.UI_id === id);
-      if (index !== -1) {
-        const updatedItem = { ...this.peyementList[index] };
-        updatedItem.status = 'active';
-        this.peyementList[index] = updatedItem;
-        this.backendService.sendOffers(this.localId.localId, this.peyementList);
-      }
-      this.remove(id);
-    }
+    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
+    this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
   }
 
   sortBy(field: string) {
@@ -113,10 +82,6 @@ export class PayementListComponent implements OnInit, OnDestroy {
     }
 
     this.cdr.detectChanges(); // Detect changes after sorting
-  }
-
-  private streamSearchText() {
-    this.searchSubscription = this.userSearch._searchText$.subscribe((data) => this.searchText = data);
   }
 
   private sortNumericField(field: string) {

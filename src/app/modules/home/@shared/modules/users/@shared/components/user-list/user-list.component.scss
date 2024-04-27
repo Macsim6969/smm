@@ -1,0 +1,126 @@
+.navigation {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: none;
+  margin-bottom: 31px;
+
+  .navigation-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 22px 30px 22px 16px;
+
+    .change {
+      background-color: white;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 13.4px;
+
+      span {
+        color: #A3AED0;
+        font-size: 2rem;
+        line-height: 2.4rem;
+        font-weight: 500;
+      }
+
+      mat-icon {
+        width: 11px;
+
+        &.active {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+  }
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 6.6px;
+  padding: 0;
+
+
+  .user {
+
+    .settings {
+      display: none;
+      &.active {
+        display: flex;
+      }
+      .setting-content{
+        width: 100%;
+      }
+    }
+
+  }
+
+  .users-list {
+    padding: 10px 16.55px;
+    display: flex;
+    border-radius: 10px;
+    background-color: #ffffff;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &:hover {
+
+      background: linear-gradient(90deg, #6FA9FF 0%, #3470CA 52%, #0048B3 100%);
+
+      p {
+        color: #FFFFFF;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(90deg, #6FA9FF 0%, #3470CA 52%, #0048B3 100%);
+
+      p {
+        color: #FFFFFF;
+      }
+    }
+
+    .mdc-list-item__primary-text {
+      padding: 0 26.5px 0 16.5px;
+      display: flex;
+      flex-direction: row !important;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    p {
+      color: #A3AED0;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .name{
+      width: 180px;
+    }
+
+    .id{
+      width: 70px;
+    }
+
+    .country{
+      width: 180px;
+    }
+    .pay{
+      width: 144px;
+    }
+
+    .osc{
+      width: 150px;
+    }
+
+    .status{
+      width: 100px;
+    }
+  }
+}

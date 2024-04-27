@@ -1,0 +1,54 @@
+<mat-card class="navigation">
+  <mat-card-content class="navigation-content">
+    <button class="change" (click)="sortBy('UI_id')">
+      <span>UID</span>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
+    </button>
+
+    <button class="change" (click)="sortBy('name')">
+      <span>Nazwa</span>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
+    </button>
+
+    <button class="change" (click)="sortBy('brand')">
+      <span>Marka</span>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
+    </button>
+
+    <button class="change" (click)="sortBy('pay')">
+      <span>Płacić</span>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
+    </button>
+
+    <button class="change" (click)="sortBy('balance')">
+      <span>Balansować</span>
+      <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
+    </button>
+
+    <button class="change">
+      <span>Status</span>
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<div class="users">
+  <div class="user" *ngFor="let lists of peyementList| filter:searchText; index as i">
+    <div class="users-list" [ngClass]="{'active': i == isActiveId}" (click)="openSettings(i)">
+      <p class="id">{{ lists.UI_id }}</p>
+      <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
+      <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
+      <p class="country">{{lists.country}}</p>
+      <p class="pay">{{lists.pay}}</p>
+      <p class="osc"> {{lists.oscillate}}</p>
+      <p class="status">{{lists.status}}</p>
+      <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
+      <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
+        <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>
+        <mat-icon class="button" svgIcon="confirme" (click)="doneChange(lists.UI_id)"></mat-icon>
+      </div>
+    </div>
+    <div class="settings" [ngClass]="{'active': i == isActiveId}">
+      <app-settings class="setting-content"></app-settings>>
+    </div>
+  </div>
+</div>

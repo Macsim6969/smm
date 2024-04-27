@@ -7,6 +7,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import { MatList, MatListItem } from "@angular/material/list";
 
 
 @NgModule({
@@ -14,6 +15,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
     CurrencyStarPipe
   ],
   exports: [
+    MatList,
+    MatListItem,
     MatIcon,
     MatCard,
     MatButton,
@@ -31,6 +34,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
     MatDatepickerInput
   ],
   imports: [
+    MatList,
+    MatListItem,
     MatIcon,
     MatCard,
     MatButton,
