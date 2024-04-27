@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PeyementList } from '../../../../../../../shared/interfaces/backend.interface';
+import { UsersList } from '../interface/user.interface';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: PeyementList[], searchText: string): any[] {
+  transform(items: UsersList[], searchText: string): any[] {
     if (!items) {
       return [];
     }

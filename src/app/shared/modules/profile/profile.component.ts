@@ -12,8 +12,8 @@ import { BackendService } from "../../services/backend.service";
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   private rules: 'manager' | 'brand' | 'afiliat';
-  public userData: UserData;
-  public isEditProfil: boolean
+  public userData: UserData | any;
+  public isEditProfil: boolean = false;
   public email: string;
   public password: string;
   public name: string;
@@ -34,6 +34,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.getDataRulesFromStore();
   }
 
+  private getUserDataFromStore() {
+    this.userDataSubscription = this.store._userData$.subscribe((data: UserData) => {
+      const keysCount = Object.keys(data).length;
+      if (keysCount === 1) {
+        this.userData = Object.values(data);
+      } else {
+
+        this.userData = data;
+      }
+    });
+  }
+
+
   private getDataRulesFromStore() {
     this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
       this.rules = data;
@@ -44,12 +57,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.rules !== 'afiliat') {
       this.isEditProfil = !this.isEditProfil;
     }
+
+    this.name = this.userData.name;
+    this.email = this.userData.email;
+    this.password = this.userData.password;
+    this.address = this.userData.address;
+    this.number = this.userData.number;
   }
 
   public save() {
-    this.changePassword()
-    this.setDataToStore();
-    this.isEditProfil = false;
+    if (this.isEditProfil) {
+      if (this.userData.password !== this.password) {
+        this.changePassword()
+      }
+      this.setDataToStore();
+      this.isEditProfil = false;
+    }
   }
 
   ngOnDestroy() {
@@ -57,15 +80,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.rulesSubscription.unsubscribe();
   }
 
-  private getUserDataFromStore() {
-    this.userDataSubscription = this.store._userData$.subscribe((data: UserData) => {
-      if (Object.keys(data)) {
-        this.userData = Object.values(data)[0];
-      } else {
-        this.userData = data
-      }
-    })
-  }
 
   private changePassword() {
     this.authService.resetPassword(this.email, this.password).subscribe(
@@ -81,11 +95,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private setDataToStore() {
     const localId = JSON.parse(localStorage.getItem('userData'));
     const newUserData: UserData = {
+      userID: this.userData.userID,
       email: this.email,
       name: this.name,
       password: this.password,
       address: this.address,
-      number: this.number
+      number: this.number,
+      rules: this.store._whosePage
     }
     this.backendService.sendNewDataUser(localId.localId, newUserData);
 

@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { PeyementList } from '../../../../../../../../shared/interfaces/backend.interface';
 import { Subscription } from 'rxjs';
 import { UsersSearchService } from '../../../../../../../../shared/services/usersSearch.service';
 import { BackendService } from '../../../../../../../../shared/services/backend.service';
 import { ListIconService } from '../../../../../../../../shared/services/list.service';
+import { UsersList } from '../../interface/user.interface';
 
 @Component({
   selector: 'app-user-list',
@@ -11,7 +11,7 @@ import { ListIconService } from '../../../../../../../../shared/services/list.se
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  @Input() public peyementList: PeyementList[];
+  @Input() public peyementList: UsersList[];
   @Input() public isWork: boolean;
   public settingsActiveId: number;
   public localId: any;
@@ -36,6 +36,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.localId = JSON.parse(localStorage.getItem('userData'));
     this.streamSearchText();
+    console.log(this.peyementList)
   }
 
   private streamSearchText() {
@@ -47,32 +48,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.isActiveId = id;
   }
 
-  public removeChange(id: number) {
-    this.isChange = false;
-    this.isActiveId = null;
-    this.pay = null;
-    this.name = null;
-  }
-
-  public doneChange(id: number) {
-    let index = this.peyementList.findIndex(data => data.UI_id === id);
-    if (index !== -1) {
-
-      let updatedData = { ...this.peyementList[index] };
-
-      updatedData.name = this.name;
-      updatedData.number = this.pay;
-      this.peyementList[index] = updatedData;
-      this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
-    }
-    this.removeChange(id);
-  }
-
-  public removeManager(id: number) {
-    this.peyementList = this.peyementList.filter((data) => data.UI_id !== id);
-    this.backendService.sendPeyementList(this.localId.localId, this.peyementList);
-  }
-
+ 
   sortBy(field: string) {
     this.rotate = !this.rotate
     if (field === 'UI_id' || field === 'name' || field === 'brand') {
@@ -109,7 +85,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.reverseSort = !this.reverseSort;
   }
 
-  private getFieldValue(item: PeyementList, field: string): any {
+  private getFieldValue(item: UsersList, field: string): any {
     if (!item || item[field] === undefined) {
       return '';
     }

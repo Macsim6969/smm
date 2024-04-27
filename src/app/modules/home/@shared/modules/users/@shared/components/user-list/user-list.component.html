@@ -34,18 +34,13 @@
 <div class="users">
   <div class="user" *ngFor="let lists of peyementList| filter:searchText; index as i">
     <div class="users-list" [ngClass]="{'active': i == isActiveId}" (click)="openSettings(i)">
-      <p class="id">{{ lists.UI_id }}</p>
+      <p class="id">{{ lists.userID }}</p>
       <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
       <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
-      <p class="country">{{lists.country}}</p>
+      <p class="country">{{lists.address}}</p>
       <p class="pay">{{lists.pay}}</p>
       <p class="osc"> {{lists.oscillate}}</p>
-      <p class="status">{{lists.status}}</p>
-      <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
-      <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
-        <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>
-        <mat-icon class="button" svgIcon="confirme" (click)="doneChange(lists.UI_id)"></mat-icon>
-      </div>
+      <p class="status">{{lists.rules}}</p>  
     </div>
     <div class="settings" [ngClass]="{'active': i == isActiveId}">
       <app-settings class="setting-content"></app-settings>>

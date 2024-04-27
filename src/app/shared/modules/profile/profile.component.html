@@ -38,7 +38,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions class="profile-footer">
-      <button (click)="save()" mat-button>Ustawienia profilu</button>
+      <button [disabled]="!isEditProfil" (click)="save()" mat-button>Ustawienia profilu</button>
       <button (click)="edit()" mat-button>Edit</button>
     </mat-card-actions>
   </mat-card>
