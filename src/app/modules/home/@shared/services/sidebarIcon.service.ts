@@ -1,13 +1,15 @@
-import {Injectable} from "@angular/core";
-import {MatIconRegistry} from "@angular/material/icon";
-import {DomSanitizer} from "@angular/platform-browser";
+import { Injectable } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 @Injectable()
 
-export  class SidebarIconService{
+export class SidebarIconService {
   constructor(private matIconRegistry: MatIconRegistry,
-              private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer) {
+      
+    this.matIconRegistry.addSvgIcon('email', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/email.svg'));
     this.matIconRegistry.addSvgIcon('logo', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/auth/logo.svg'));
 
     this.matIconRegistry.addSvgIcon('group', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/sidebar/group.svg'));

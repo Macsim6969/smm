@@ -1,15 +1,16 @@
-.navigation{
+.navigation {
   background-color: #FFFFFF;
   border-radius: 10px;
   box-shadow: none;
   margin-bottom: 31px;
-  .navigation-content{
+
+  .navigation-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 22px 30px 22px 16px;
 
-    .change{
+    .change {
       background-color: white;
       border: 0;
       outline: none;
@@ -18,22 +19,25 @@
       flex-direction: row;
       align-items: center;
       gap: 13.4px;
-      span{
+
+      span {
         color: #A3AED0;
         font-size: 2rem;
         line-height: 2.4rem;
         font-weight: 500;
       }
-      mat-icon{
+
+      mat-icon {
         width: 11px;
 
-        &.active{
+        &.active {
           transform: rotateX(180deg);
         }
       }
     }
   }
 }
+
 .payement {
   display: flex;
   flex-direction: column;
@@ -67,6 +71,31 @@
       line-height: 2.4rem;
       font-weight: 700;
     }
+
+    .id {
+      width: 80px;
+    }
+
+    .name {
+      width: 200px;
+    }
+
+    .country {
+      width: 250px;
+    }
+
+    .pay {
+      width: 200px;
+    }
+
+    .oscillate {
+      width: 200px;
+    }
+
+    .payment_id {
+      width: px;
+    }
+
 
     .actions {
       .button {

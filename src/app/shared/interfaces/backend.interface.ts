@@ -18,7 +18,6 @@ export interface PeyementList{
   country: string
   payement_id: string
   number: number
-
   pay?: number
   oscillate?: number
   status?: string

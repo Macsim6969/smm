@@ -1,5 +1,5 @@
 <mat-card class="navigation">
-  <mat-card-content class="navigation-content">
+  <mat-card-content class="navigation-content" *ngIf="classUrl !== 'manager'">
     <button class="change" (click)="sortBy('UI_id')">
       <span>UID</span>
       <mat-icon [ngClass]="{'active': this.rotate}" svgIcon="arrow"></mat-icon>
@@ -35,14 +35,15 @@
   <mat-list-item class="payement-list" *ngFor="let lists of peyementList| filter:searchText; index as i"
     [ngClass]="{'active': i == 0}">
     <p class="id">{{ lists.UI_id }}</p>
-    <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}</p>
+    <p class="name" *ngIf="!isChange || isActiveId !== lists.UI_id">{{lists.name}}<p>
     <input *ngIf="isChange && isActiveId === lists.UI_id" type="text" value="{{lists.name}}" [(ngModel)]="name">
     <p class="country">{{lists.country}}</p>
-    <p *ngIf="classUrl === 'users'|| 'offers'">{{lists.pay}}</p>
-    <p *ngIf="classUrl === 'users' || 'offers'">{{lists.oscillate}}</p>
-    <p *ngIf="classUrl === 'users'">{{lists.status}}</p>
-    <p *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
-    <p *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number" >${{ lists.number }}</p>
+    <p class="pay" *ngIf="classUrl !== 'manager'">${{lists.pay ? lists.pay : 0}}</p>
+    <p class="oscillate" *ngIf="classUrl !== 'manager'">${{lists.oscillate ? lists.oscillate : 0}}</p>
+    <p class="status" *ngIf="classUrl === 'users'">{{lists.status}}</p>
+    <p class="payment_id" *ngIf="classUrl === 'manager'" class="number_id">{{ lists.payement_id }}</p>
+    <p ngClass="number" *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="number">${{ lists.number }}
+    </p>
     <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
     <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
       <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>

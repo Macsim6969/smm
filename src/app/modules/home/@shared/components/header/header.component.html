@@ -1,9 +1,22 @@
 <section class="header">
-  <div class="header-item" *ngFor="let header of headerItems">
-    <p class="header-text">{{header.title}}</p>
-    <div class="header-icon">
-      <mat-icon svgIcon="{{header.icon}}"></mat-icon>
+  <div class="header_left">
+    <div class="header-item">
+      <p class="header-text">Indeks</p>
+      <p class="coeficient" [innerHTML]="">{{clicks}}</p>
+      <div class=" bottom red"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Płatności</p>
+      <p class="coeficient" [innerHTML]="">{{decommissioned}}</p>
+      <div class=" bottom orange"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Budżet</p>
+      <p class="coeficient" [innerHTML]="">{{balanc}}</p>
+      <div class=" bottom green "></div>
     </div>
   </div>
+  <div class="email">
+    <mat-icon svgIcon="email"></mat-icon>
+  </div>
 </section>
-  
