@@ -90,8 +90,10 @@ export class BackendService {
     })
   }
 
-  public removeUserFromFirebase(userId: string): Observable<any> {
-    return this.http.delete(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}`)
+  public removeUserFromFirebase(userId: string) {
+    return this.http.delete(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}.json`).subscribe(() =>{
+      this.getAllUsers();
+    })
   }
 
 }

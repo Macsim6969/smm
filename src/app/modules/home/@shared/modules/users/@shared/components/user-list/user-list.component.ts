@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   public deleteUser(idUser: string){
-    this.backendService.removeUserFromFirebase(idUser).subscribe();
+    this.backendService.removeUserFromFirebase(idUser);
   }
 
  
