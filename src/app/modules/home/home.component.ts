@@ -11,6 +11,7 @@ import { ActivatedRoute, Navigation, NavigationEnd, NavigationStart, Router } fr
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private rulesSubscription: Subscription;
+  private routerSubscription: Subscription;
   constructor(
     private backendService: BackendService,
     private store: StoreService,
@@ -25,8 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private checkRouterPath() {
-    this.router.events.subscribe((event) => {
-      if (event['routerEvent'].url === '/manager') {
+   this.routerSubscription = this.router.events.pipe(take(2)).subscribe((event) => {
+      if (event['routerEvent']?.url === '/manager') {
         console.log(event['routerEvent'].url)
         this.checkWhosePageActive();
       }
@@ -63,5 +64,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.rulesSubscription.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 }
