@@ -46,7 +46,6 @@ export class PayementListComponent implements OnInit, OnDestroy {
       this.isActiveId = id;
     }
 
-    console.log(this.peyementList)
     this.pay = this.peyementList[i].pay;
     this.name = this.peyementList[i].name;
   }
@@ -85,7 +84,6 @@ export class PayementListComponent implements OnInit, OnDestroy {
   }
 
   public compleate(id) {
-    console.log(1)
     if (this.rules !== 'brand' && this.isWork) {
       const index = this.peyementList.findIndex(data => data.UI_id === id);
       if (index !== -1) {

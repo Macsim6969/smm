@@ -36,7 +36,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.localId = JSON.parse(localStorage.getItem('userData'));
     this.streamSearchText();
-    console.log(this.peyementList)
   }
 
   private streamSearchText() {

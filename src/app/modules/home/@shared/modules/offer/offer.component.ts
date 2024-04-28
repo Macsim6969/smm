@@ -35,7 +35,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   private getOffersFromStore() {
     this.offersSubscription = this.store._offer$.subscribe((data: PeyementList[]) => {
       if (data) {
-        this.peyementUsersList = Object.values(data).filter((data) => data.status === '');
+        this.peyementUsersList = Object.values(data).filter((data) => data.status !== 'active' && data.status !== 'inWork');
       }
     })
   }

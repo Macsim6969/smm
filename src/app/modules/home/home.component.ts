@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private checkRouterPath() {
    this.routerSubscription = this.router.events.pipe(take(2)).subscribe((event) => {
       if (event['routerEvent']?.url === '/manager') {
-        console.log(event['routerEvent'].url)
         this.checkWhosePageActive();
       }
     });
