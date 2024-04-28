@@ -7,7 +7,6 @@ import {PayementListModule} from "../../../../../shared/modules/payement-list/pa
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UsersSearchService } from "../../../../../shared/services/usersSearch.service";
 import { MarkaComponent } from "./marka.component";
-import { UsersSearchComponent } from "./@shared/components/users-search/users-search.component";
 
 
 const routes: Routes = [
@@ -15,8 +14,7 @@ const routes: Routes = [
 ]
 @NgModule({
   declarations: [
-    MarkaComponent,
-    UsersSearchComponent
+    MarkaComponent
   ],
   exports: [],
   imports: [

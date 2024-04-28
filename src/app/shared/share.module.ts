@@ -9,13 +9,17 @@ import {CurrencyStarPipe} from "./pipes/currentyStar.pipe";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { MatList, MatListItem } from "@angular/material/list";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UsersSearchComponent } from "./components/users-search/users-search.component";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    CurrencyStarPipe
+    CurrencyStarPipe,
+    UsersSearchComponent
   ],
   exports: [
+    UsersSearchComponent,
     MatList,
     MatListItem,
     MatIcon,
@@ -52,7 +56,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDatepickerToggle,
     MatDatepicker,
     MatDatepickerInput,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ]
 })
 

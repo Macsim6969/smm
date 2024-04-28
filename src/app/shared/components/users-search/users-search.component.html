@@ -1,14 +1,15 @@
 <div class="users-header">
   <div class="header-title">
-    Aktywne oferty
+    Użytkownicy
   </div>
   <div class="header-search">
     <div class="search">
       <mat-icon svgIcon="search"></mat-icon>
       <input placeholder="Szukaj" type="Szukaj" (input)="sendSearch()" [(ngModel)]="searchText">
     </div>
-    <div class="actions">
+    <div class="actions" (click)="addedOffers()">
       Dodaj ofertę
-    </div>
+    </div> 
   </div>
 </div>
+ 

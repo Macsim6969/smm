@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UsersSearchService } from '../../../../../../../../shared/services/usersSearch.service';
-import { PopupOfferService } from '../../../../../../../../shared/services/popup-offer.service';
+import { PopupOfferService } from '../../services/popup-offer.service';
+import { UsersSearchService } from '../../services/usersSearch.service';
 
 @Component({
   selector: 'app-users-search',
@@ -23,7 +23,6 @@ export class UsersSearchComponent {
   public addedOffers() {
     if (this.rules !== 'afiliat') {
       this.isPopupOffer._isOfferPopup = true;
-      this.isPopupOffer._userData = true;
     }
   }
 }
