@@ -60,6 +60,7 @@
   }
 
   .users-list {
+    position: relative;
     padding: 10px 16.55px;
     display: flex;
     border-radius: 10px;
@@ -124,6 +125,15 @@
 
     .status{
       width: 100px;
+    }
+
+    .trash{
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: transparent;
     }
   }
 }

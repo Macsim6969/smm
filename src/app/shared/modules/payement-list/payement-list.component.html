@@ -46,11 +46,11 @@
     </p>
     <input *ngIf="isChange && isActiveId === lists.UI_id" type="number" value="{{lists.number}}" [(ngModel)]="pay">
     <div *ngIf="isChange && isActiveId == lists.UI_id" class="actions">
-      <mat-icon class="button" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>
+      <mat-icon class="button removeChange" svgIcon="trash" (click)="removeChange(lists.UI_id)"></mat-icon>
       <mat-icon class="button" svgIcon="confirme" (click)="doneChange(lists.UI_id)"></mat-icon>
     </div>
     <div *ngIf="classUrl === 'manager' && (!isChange || isActiveId !== lists.UI_id)" class="actions">
-      <mat-icon class="button" svgIcon="settings" (click)="changeManager(lists.UI_id)"></mat-icon>
+      <mat-icon class="button" svgIcon="settings" (click)="changeManager(lists.UI_id, i)"></mat-icon>
       <mat-icon class="button" svgIcon="trash" (click)="removeManager(lists.UI_id)"></mat-icon>
     </div>
     <div *ngIf="classUrl === 'offers'" class="actions-users">

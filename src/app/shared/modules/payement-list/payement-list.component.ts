@@ -40,11 +40,15 @@ export class PayementListComponent implements OnInit, OnDestroy {
     this.streamSearchText();
   }
 
-  public changeManager(id: number) {
-    if (this.rules !== 'brand') {
+  public changeManager(id: number, i: number) {
+    if (this.rules === 'manager') {
       this.isChange = true;
       this.isActiveId = id;
     }
+
+    console.log(this.peyementList)
+    this.pay = this.peyementList[i].pay;
+    this.name = this.peyementList[i].name;
   }
 
   public removeChange(id: number) {
@@ -57,15 +61,14 @@ export class PayementListComponent implements OnInit, OnDestroy {
   public doneChange(id: number) {
     let index = this.peyementList.findIndex(data => data.UI_id === id);
     if (index !== -1) {
-
       let updatedData = { ...this.peyementList[index] };
-
       updatedData.name = this.name;
       updatedData.number = this.pay;
       this.peyementList[index] = updatedData;
       this.backendService.sendOffers(this.localId.localId, this.peyementList);
     }
-    this.removeChange(id);
+
+    this.removeChange(id)
   }
 
   public removeManager(id: number) {

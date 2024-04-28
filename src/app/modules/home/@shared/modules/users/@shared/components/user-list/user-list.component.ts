@@ -48,6 +48,10 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.isActiveId = id;
   }
 
+  public deleteUser(idUser: string){
+    this.backendService.removeUserFromFirebase(idUser).subscribe();
+  }
+
  
   sortBy(field: string) {
     this.rotate = !this.rotate

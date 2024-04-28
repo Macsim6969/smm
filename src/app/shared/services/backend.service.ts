@@ -5,6 +5,7 @@ import { StoreService } from "./store.service";
 import { CardHistory, CardInterface } from "../interfaces/card.interface";
 import { User } from "../../modules/auth/@shared/auth.model";
 import { Users } from "../../modules/home/@shared/modules/users/@shared/interface/user.interface";
+import { Observable, catchError, tap } from "rxjs";
 
 @Injectable()
 
@@ -88,4 +89,9 @@ export class BackendService {
       this.store._allUsers = usersArray.filter((data) => data.rules !== 'manager');
     })
   }
+
+  public removeUserFromFirebase(userId: string): Observable<any> {
+    return this.http.delete(`https://smm-oksima-default-rtdb.firebaseio.com/users/${userId}`)
+  }
+
 }

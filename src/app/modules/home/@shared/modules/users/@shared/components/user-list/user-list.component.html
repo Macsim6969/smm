@@ -41,6 +41,9 @@
       <p class="pay">${{lists.decommissioned ? lists.decommissioned : 0 }}</p>
       <p class="osc">${{lists.balanc ? lists.balanc : 0}}</p>
       <p class="status">{{lists.rules}}</p>  
+      <button (click)="deleteUser(lists.userID)" *ngIf="i == isActiveId" class="trash">
+        <mat-icon svgIcon="trash"></mat-icon>
+      </button>
     </div>
     <div class="settings" [ngClass]="{'active': i == isActiveId}">
       <app-settings [decommissioned]="lists.decommissioned" [balanc]="lists.balanc" [clicks]="lists.clicks" class="setting-content" [user]="lists" ></app-settings>>
