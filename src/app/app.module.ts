@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {StoreService} from "./shared/services/store.service";
 import {BackendService} from "./shared/services/backend.service";
 import { ListIconService } from './shared/services/list.service';
+import { ProfilIconService } from './shared/modules/users-cards/services/profilIcon.service';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ListIconService } from './shared/services/list.service';
     provideAnimationsAsync(),
     StoreService,
     BackendService,
-    ListIconService
+    ListIconService,
+    ProfilIconService
   ],
   bootstrap: [AppComponent]
 })

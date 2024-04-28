@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BackendService } from '../../services/backend.service';
 import { PopupOfferService } from '../../services/popup-offer.service';
 import { StoreService } from '../../services/store.service';
+import { ProfilIconService } from '../../modules/users-cards/services/profilIcon.service';
 
 @Component({
   selector: 'app-popup-offers',
@@ -15,16 +16,15 @@ export class PopupOffersComponent {
   public isUser: boolean
   public form: FormGroup
   constructor(
-    private backEndService: BackendService,
     private isPopupService: PopupOfferService,
     private backend: BackendService,
-    private store: StoreService
+    private store: StoreService,
+    private profileIcon: ProfilIconService
   ) { }
 
   ngOnInit() {
     this.initializeForm();
     this.streamDataPopupOffersFromStore();
-    this.streamDataPopupOffersIsUserFromStore();
   }
 
   private streamDataPopupOffersFromStore() {
@@ -32,11 +32,7 @@ export class PopupOffersComponent {
       this.isPopup = data;
     })
   }
-  private streamDataPopupOffersIsUserFromStore() {
-    this.isPopupService._isOfferPopup$.subscribe((data) => {
-      this.isUser = data;
-    })
-  }
+
   private initializeForm() {
     this.form = new FormGroup<any>({
       name: new FormControl('', [Validators.required]),
@@ -71,9 +67,11 @@ export class PopupOffersComponent {
 
       formData['UI_id'] = lenght + 1;
       formData['payment_id'] = this.generateRandomId(10);
-     this.backend.sendOffer(localId.localId, formData);
+      this.backend.sendOffer(localId.localId, formData);
       this.isPopupService._isOfferPopup = false;
     }
+
+    this.form.reset();
   }
 
   private generateRandomId(length: number): string {

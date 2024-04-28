@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from "../../shared/services/backend.service";
-import { Subscription } from 'rxjs';
+import { Subscription, filter, of, take } from 'rxjs';
+import { StoreService } from '../../shared/services/store.service';
+import { ActivatedRoute, Navigation, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +12,40 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
   private rulesSubscription: Subscription;
   constructor(
-    private backendService: BackendService
+    private backendService: BackendService,
+    private store: StoreService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   ngOnInit() {
     this.initializeUserData();
     this.initializePeymentList();
+    this.checkRouterPath();
+
   }
+
+  private checkRouterPath() {
+    this.router.events.subscribe((event) => {
+      if (event['routerEvent'].url === '/manager') {
+        console.log(event['routerEvent'].url)
+        this.checkWhosePageActive();
+      }
+    });
+  }
+
+  private checkWhosePageActive() {
+    this.store._whosePage$.pipe(take(2)).subscribe((data) => {
+      if (data === 'manager') {
+        this.router.navigate(['/manager']).then();
+      } else if (data === 'brand') {
+        this.router.navigate(['/marka']).then();
+      } else if (data === 'afiliat') {
+        this.router.navigate(['/affiliate']).then();
+      }
+    });
+
+  }
+
 
   private initializeUserData() {
     const localId = JSON.parse(localStorage.getItem('userData'));
@@ -24,9 +54,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private initializePeymentList() {
     const localId = JSON.parse(localStorage.getItem('userData'));
-    // this.backendService.getPeyementList(localId.localId);
-    // this.backendService.getPeyementUsersListComplete(localId.localId);
-    // this.backendService.getPeyementUsersList(localId.localId);
     this.backendService.getNewUsersCard(localId.localId);
     this.backendService.getUserCardsHistory(localId.localId);
     //

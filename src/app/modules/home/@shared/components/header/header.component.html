@@ -1,5 +1,5 @@
 <section class="header">
-  <div class="header_left">
+  <div class="header_left manager" *ngIf="this.rules === 'manager'">
     <div class="header-item">
       <p class="header-text">Indeks</p>
       <p class="coeficient" [innerHTML]="">{{clicks}}</p>
@@ -12,6 +12,40 @@
     </div>
     <div class="header-item ">
       <p class="header-text">Budżet</p>
+      <p class="coeficient" [innerHTML]="">{{balanc}}</p>
+      <div class=" bottom green "></div>
+    </div>
+  </div>
+  <div class="header_left brand" *ngIf="this.rules === 'brand'">
+    <div class="header-item">
+      <p class="header-text">Wskazówki</p>
+      <p class="coeficient" [innerHTML]="">{{clicks}}</p>
+      <div class=" bottom red"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Odpisanie</p>
+      <p class="coeficient" [innerHTML]="">{{decommissioned}}</p>
+      <div class=" bottom orange"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Balansować</p>
+      <p class="coeficient" [innerHTML]="">{{balanc}}</p>
+      <div class=" bottom green "></div>
+    </div>
+  </div>
+  <div class="header_left afiliat" *ngIf="this.rules === 'afiliat'">
+    <div class="header-item">
+      <p class="header-text">Kliki</p>
+      <p class="coeficient" [innerHTML]="">{{clicks}}</p>
+      <div class=" bottom red"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Trzymać</p>
+      <p class="coeficient" [innerHTML]="">{{decommissioned}}</p>
+      <div class=" bottom orange"></div>
+    </div>
+    <div class="header-item ">
+      <p class="header-text">Narzut</p>
       <p class="coeficient" [innerHTML]="">{{balanc}}</p>
       <div class=" bottom green "></div>
     </div>

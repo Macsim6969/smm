@@ -16,8 +16,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public clicks: number = 0;
   public balanc: number = 0;
   public usersInfo: UsersList;
+  public rules: 'manager' | 'brand' | 'afiliat';
   private userSubscription: Subscription;
   private offerSubscripption: Subscription;
+  private rulesSubscription: Subscription;
 
   constructor(
     private sidebarIcon: SidebarIconService,
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getUserDataFromStore();
     this.getUserOffers();
+    this.getRulesDataFromStore();
   }
 
   private getUserDataFromStore() {
@@ -49,6 +52,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
   }
 
+  private getRulesDataFromStore() {
+    this.rulesSubscription = this.store._whosePage$.subscribe((data) => {
+      this.rules = data;
+    })
+  }
+
   private serndDataToStore() {
     const userData = {
       ...this.usersInfo,
@@ -66,5 +75,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
     this.offerSubscripption.unsubscribe();
+    this.rulesSubscription.unsubscribe();
   }
 }

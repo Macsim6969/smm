@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {UsersCardsComponent} from "./users-cards.component";
-import {ShareModule} from "../../share.module";
-import {PopupCardComponent} from "../../components/popup-card/popup-card.component";
-import {FormatCardNumberPipe} from "./services/formatCardNumber.pipe";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ProfilIconService} from "./services/profilIcon.service";
-import {UsersCardsService} from "../../services/usersCards.service";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UsersCardsComponent } from "./users-cards.component";
+import { ShareModule } from "../../share.module";
+import { PopupCardComponent } from "../../components/popup-card/popup-card.component";
+import { FormatCardNumberPipe } from "./services/formatCardNumber.pipe";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ProfilIconService } from "./services/profilIcon.service";
+import { UsersCardsService } from "../../services/usersCards.service";
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import {UsersCardsService} from "../../services/usersCards.service";
     PopupCardComponent,
     FormatCardNumberPipe
   ],
-  exports:[
+  exports: [
     UsersCardsComponent
   ],
   imports: [
@@ -24,7 +24,7 @@ import {UsersCardsService} from "../../services/usersCards.service";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers:[ ProfilIconService, UsersCardsService]
+  providers: [UsersCardsService]
 })
 export class UsersCardsModule {
 }
